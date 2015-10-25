@@ -17,10 +17,7 @@ const imgStyles = {
 };
 
 export default class Image extends Component {
-  constructor() {
-    super();
-    this.state = { opacityToggle: true };
-  }
+  state = { opacityToggle: true };
 
   componentWillReceiveProps(newProps) {
     if (this.props.src !== newProps.src) {

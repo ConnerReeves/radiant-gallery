@@ -12,6 +12,7 @@ const containerStyles = {
   position: 'fixed',
   top: '10px',
   left: '10px',
+  transition: 'opacity 0.5s ease-in-out',
   width: '100px',
   zIndex: 1
 };
@@ -27,9 +28,16 @@ const controlButtonStyles = {
 };
 
 class PlaybackControls extends Component {
+  state = { opacity: 0 };
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this._makeVisible.bind(this));
+    document.addEventListener('mousemove', this._makeVisible.bind(this));
+  }
+
   render() {
     return (
-      <div style={ containerStyles }>
+      <div style={ Object.assign({}, containerStyles, { opacity: this.state.opacity }) }>
         { this._getControlButton('backward', previousAsset) }
         { this._getPlayPauseControl() }
         { this._getControlButton('forward', nextAsset) }
@@ -60,6 +68,19 @@ class PlaybackControls extends Component {
       default:
         return null;
     }
+  }
+
+  _makeVisible() {
+    this.setState({
+      opacity: 1
+    }, () => {
+      clearTimeout(this.opacityTimeout);
+      this.opacityTimeout = setTimeout(() => {
+        this.setState({
+          opacity: 0
+        });
+      }, 3000);
+    });
   }
 }
 

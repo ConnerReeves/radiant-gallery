@@ -39430,7 +39430,8 @@
 	  function Image() {
 	    _classCallCheck(this, Image);
 	
-	    _get(Object.getPrototypeOf(Image.prototype), 'constructor', this).call(this);
+	    _get(Object.getPrototypeOf(Image.prototype), 'constructor', this).apply(this, arguments);
+	
 	    this.state = { opacityToggle: true };
 	  }
 	
@@ -39607,6 +39608,7 @@
 	  position: 'fixed',
 	  top: '10px',
 	  left: '10px',
+	  transition: 'opacity 0.5s ease-in-out',
 	  width: '100px',
 	  zIndex: 1
 	};
@@ -39628,14 +39630,22 @@
 	    _classCallCheck(this, PlaybackControls);
 	
 	    _get(Object.getPrototypeOf(PlaybackControls.prototype), 'constructor', this).apply(this, arguments);
+	
+	    this.state = { opacity: 0 };
 	  }
 	
 	  _createClass(PlaybackControls, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      document.addEventListener('mousedown', this._makeVisible.bind(this));
+	      document.addEventListener('mousemove', this._makeVisible.bind(this));
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: containerStyles },
+	        { style: Object.assign({}, containerStyles, { opacity: this.state.opacity }) },
 	        this._getControlButton('backward', _actionsNavigationActions.previousAsset),
 	        this._getPlayPauseControl(),
 	        this._getControlButton('forward', _actionsNavigationActions.nextAsset)
@@ -39665,6 +39675,22 @@
 	        default:
 	          return null;
 	      }
+	    }
+	  }, {
+	    key: '_makeVisible',
+	    value: function _makeVisible() {
+	      var _this = this;
+	
+	      this.setState({
+	        opacity: 1
+	      }, function () {
+	        clearTimeout(_this.opacityTimeout);
+	        _this.opacityTimeout = setTimeout(function () {
+	          _this.setState({
+	            opacity: 0
+	          });
+	        }, 3000);
+	      });
 	    }
 	  }]);
 	
