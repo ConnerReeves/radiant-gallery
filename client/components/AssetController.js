@@ -1,22 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { nextAsset } from '../actions/NavigationActions'; //TODO: Move into navigation controls
+
 import Image from './Image';
 
-module.exports = React.createClass({
-  getInitialState() {
-    return {
-      currentAssetIndex: 0
-    };
-  },
-
+class AssetController extends Component {
   componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        currentAssetIndex: this.state.currentAssetIndex === assets.length - 1 ? 0 : this.state.currentAssetIndex + 1
-      });
-    }, 5000);
-  },
+    setInterval(bindActionCreators(nextAsset, this.props.dispatch), 5000);
+  }
 
   render() {
-    return <Image src={ assets[this.state.currentAssetIndex] } />;
+    return <Image src={ this.props.currentAsset } />;
   }
-});
+}
+
+export default connect(state => ({
+  currentAsset: state.currentAsset
+}))(AssetController);

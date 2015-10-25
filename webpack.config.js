@@ -7,18 +7,18 @@ module.exports = {
     filename: "bundle.js"
   },
 
-  devtool: '#inline-source-map',
+  devtool: '#source-map',
 
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel',
-      },
-      {
-        test: /.scss$/,
-        loader: 'style!css!sass?sourceMap'
+    loaders: [{
+      test: /\.js$/,
+      loader: 'babel',
+      query: {
+        stage: 0
       }
-    ]
+    },{
+      test: /.scss$/,
+      loader: 'style!css!sass?sourceMap'
+    }]
   }
 }

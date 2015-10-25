@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const imgStyle = {
   bottom: '-50%',
@@ -16,14 +16,11 @@ const imgStyle = {
   width: 'auto'
 };
 
-module.exports = React.createClass({
-  propTypes: {
-    src: React.PropTypes.string.isRequired
-  },
-
-  getInitialState() {
-    return { opacityToggle: true };
-  },
+export default class Image extends Component {
+  constructor() {
+    super();
+    this.state = { opacityToggle: true };
+  }
 
   componentWillReceiveProps(newProps) {
     if (this.props.src !== newProps.src) {
@@ -36,7 +33,7 @@ module.exports = React.createClass({
         });
       });
     }
-  },
+  }
 
   render() {
     const introStyle = Object.assign({}, imgStyle, { opacity: this.state.opacityToggle ? 1 : 0 });
@@ -48,9 +45,13 @@ module.exports = React.createClass({
         { this._getImgTag(this.state.staleSrc, outroStyle) }
       </div>
     );
-  },
+  }
 
   _getImgTag(src, style) {
     return src ? <img key={ src } src={ src } style={ style } /> : null;
   }
-});
+};
+
+Image.propTypes = {
+  src: React.PropTypes.string.isRequired
+};
