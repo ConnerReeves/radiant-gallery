@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const imgStyle = {
+const imgStyles = {
   bottom: '-50%',
   height: 'auto',
   left:'-50%',
@@ -12,7 +12,7 @@ const imgStyle = {
   position: 'absolute',
   right: '-50%',
   top: '-50%',
-  transition: 'opacity 2.5s ease-in-out',
+  transition: 'opacity 1s ease-in-out',
   width: 'auto'
 };
 
@@ -36,21 +36,21 @@ export default class Image extends Component {
   }
 
   render() {
-    const introStyle = Object.assign({}, imgStyle, { opacity: this.state.opacityToggle ? 1 : 0 });
-    const outroStyle = Object.assign({}, imgStyle, { opacity: this.state.opacityToggle ? 0 : 1 });
+    const introStyle = Object.assign({}, imgStyles, { opacity: this.state.opacityToggle ? 1 : 0 });
+    const outroStyle = Object.assign({}, imgStyles, { opacity: this.state.opacityToggle ? 0 : 1 });
 
     return (
       <div>
-        { this._getImgTag(this.props.src, introStyle) }
-        { this._getImgTag(this.state.staleSrc, outroStyle) }
+        { this._getImg(this.props.src, introStyle) }
+        { this._getImg(this.state.staleSrc, outroStyle) }
       </div>
     );
   }
 
-  _getImgTag(src, style) {
+  _getImg(src, style) {
     return src ? <img key={ src } src={ src } style={ style } /> : null;
   }
-};
+}
 
 Image.propTypes = {
   src: React.PropTypes.string.isRequired

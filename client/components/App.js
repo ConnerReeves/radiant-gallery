@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import AssetController from './AssetController';
+import PlaybackControls from './PlaybackControls';
 
 export default class App extends Component {
   render() {
     return (
-      <AssetController />
-    )
+      <div>
+        <PlaybackControls />
+        <AssetController />
+      </div>
+    );
   }
-};
+}
