@@ -13,7 +13,7 @@ module.exports = React.createClass({
       this.setState({
         currentAssetIndex: this.state.currentAssetIndex === assets.length - 1 ? 0 : this.state.currentAssetIndex + 1
       });
-    }, 3000);
+    }, 5000);
   },
 
   render() {
