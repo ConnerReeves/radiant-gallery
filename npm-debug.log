@@ -1,9 +1,9 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/local/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'install',
+1 verbose cli   'i',
 1 verbose cli   '--save',
-1 verbose cli   'react-fontawesome' ]
+1 verbose cli   'redux-thunk' ]
 2 info using npm@2.14.7
 3 info using node@v4.2.1
 4 verbose install initial load of /Users/conner/projects/radiant-gallery/package.json
@@ -28,230 +28,192 @@
 23 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react/package.json
 24 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react-dom/package.json
 25 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react-font-awesome/package.json
-26 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react-redux/package.json
-27 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/redux/package.json
-28 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/sass-loader/package.json
-29 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/style-loader/package.json
-30 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/walk/package.json
-31 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/webpack/package.json
-32 info package.json babel-core@5.8.29 No README data
-33 info package.json fs@0.0.2 fs is also the name of a node core module.
-34 info package.json fs@0.0.2 No description
-35 info package.json fs@0.0.2 No repository field.
-36 info package.json path@0.12.7 path is also the name of a node core module.
-37 info package.json walk@2.3.9 No license field.
-38 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/package.json
-39 silly cache add args [ 'react-fontawesome', null ]
-40 verbose cache add spec react-fontawesome
-41 silly cache add parsed spec Result {
-41 silly cache add   raw: 'react-fontawesome',
-41 silly cache add   scope: null,
-41 silly cache add   name: 'react-fontawesome',
-41 silly cache add   rawSpec: '',
-41 silly cache add   spec: '*',
-41 silly cache add   type: 'range' }
-42 silly addNamed react-fontawesome@*
-43 verbose addNamed "*" is a valid semver range for react-fontawesome
-44 silly addNameRange { name: 'react-fontawesome', range: '*', hasData: false }
-45 silly mapToRegistry name react-fontawesome
-46 silly mapToRegistry using default registry
-47 silly mapToRegistry registry https://registry.npmjs.org/
-48 silly mapToRegistry uri https://registry.npmjs.org/react-fontawesome
-49 verbose addNameRange registry:https://registry.npmjs.org/react-fontawesome not in flight; fetching
-50 verbose request uri https://registry.npmjs.org/react-fontawesome
-51 verbose request no auth needed
-52 info attempt registry request try #1 at 1:50:59 AM
-53 verbose request id 5fc59997854b1642
-54 http request GET https://registry.npmjs.org/react-fontawesome
-55 http 200 https://registry.npmjs.org/react-fontawesome
-56 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-56 verbose headers   etag: '"2L5MGEZ38EFFH9EL6PKDDN184"',
-56 verbose headers   'content-type': 'application/json',
-56 verbose headers   'cache-control': 'max-age=60',
-56 verbose headers   'content-length': '21974',
-56 verbose headers   'accept-ranges': 'bytes',
-56 verbose headers   date: 'Sun, 25 Oct 2015 07:51:00 GMT',
-56 verbose headers   via: '1.1 varnish',
-56 verbose headers   age: '48',
-56 verbose headers   connection: 'keep-alive',
-56 verbose headers   'x-served-by': 'cache-sjc3123-SJC',
-56 verbose headers   'x-cache': 'HIT',
-56 verbose headers   'x-cache-hits': '1',
-56 verbose headers   'x-timer': 'S1445759460.356613,VS0,VE0',
-56 verbose headers   vary: 'Accept' }
-57 silly get cb [ 200,
-57 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-57 silly get     etag: '"2L5MGEZ38EFFH9EL6PKDDN184"',
-57 silly get     'content-type': 'application/json',
-57 silly get     'cache-control': 'max-age=60',
-57 silly get     'content-length': '21974',
-57 silly get     'accept-ranges': 'bytes',
-57 silly get     date: 'Sun, 25 Oct 2015 07:51:00 GMT',
-57 silly get     via: '1.1 varnish',
-57 silly get     age: '48',
-57 silly get     connection: 'keep-alive',
-57 silly get     'x-served-by': 'cache-sjc3123-SJC',
-57 silly get     'x-cache': 'HIT',
-57 silly get     'x-cache-hits': '1',
-57 silly get     'x-timer': 'S1445759460.356613,VS0,VE0',
-57 silly get     vary: 'Accept' } ]
-58 verbose get saving react-fontawesome to /Users/conner/.npm/registry.npmjs.org/react-fontawesome/.cache.json
-59 silly addNameRange number 2 { name: 'react-fontawesome', range: '*', hasData: true }
-60 silly addNameRange versions [ 'react-fontawesome',
-60 silly addNameRange   [ '0.0.1',
-60 silly addNameRange     '0.0.2',
-60 silly addNameRange     '0.0.3',
-60 silly addNameRange     '0.1.0',
-60 silly addNameRange     '0.2.0',
-60 silly addNameRange     '0.2.1',
-60 silly addNameRange     '0.2.3',
-60 silly addNameRange     '0.2.4',
-60 silly addNameRange     '0.2.5',
-60 silly addNameRange     '0.3.2',
-60 silly addNameRange     '0.3.3' ] ]
-61 silly addNamed react-fontawesome@0.3.3
-62 verbose addNamed "0.3.3" is a plain semver version for react-fontawesome
-63 silly mapToRegistry name react-fontawesome
-64 silly mapToRegistry using default registry
-65 silly mapToRegistry registry https://registry.npmjs.org/
-66 silly mapToRegistry uri https://registry.npmjs.org/react-fontawesome
-67 verbose addRemoteTarball https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz not in flight; adding
-68 verbose addRemoteTarball [ 'https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz',
-68 verbose addRemoteTarball   '6fa13ba05e38123c882fd48577d182c45cfe867e' ]
-69 info retry fetch attempt 1 at 1:51:00 AM
-70 info attempt registry request try #1 at 1:51:00 AM
-71 http fetch GET https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz
-72 http fetch 200 https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz
-73 silly fetchAndShaCheck shasum 6fa13ba05e38123c882fd48577d182c45cfe867e
-74 verbose addTmpTarball /var/folders/_v/yf_qc4_n3c3_vlfjdsck8gkc0000gn/T/npm-9925-3cf59903/registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz not in flight; adding
-75 verbose addTmpTarball already have metadata; skipping unpack for react-fontawesome@0.3.3
-76 silly cache afterAdd react-fontawesome@0.3.3
-77 verbose afterAdd /Users/conner/.npm/react-fontawesome/0.3.3/package/package.json not in flight; writing
-78 verbose afterAdd /Users/conner/.npm/react-fontawesome/0.3.3/package/package.json written
-79 silly install resolved [ { name: 'react-fontawesome',
-79 silly install resolved     version: '0.3.3',
-79 silly install resolved     description: 'A React component for the font-awesome icon library.',
-79 silly install resolved     repository:
-79 silly install resolved      { type: 'git',
-79 silly install resolved        url: 'git+https://github.com/danawoodman/react-fontawesome.git' },
-79 silly install resolved     config: { entry: 'src', output: 'lib', mainFile: 'src/index.js' },
-79 silly install resolved     bugs: { url: 'https://github.com/danawoodman/react-fontawesome/issues' },
-79 silly install resolved     main: 'lib/index.js',
-79 silly install resolved     scripts:
-79 silly install resolved      { build: 'babel $npm_package_config_entry --out-dir $npm_package_config_output',
-79 silly install resolved        dist: 'npm run lint && npm run build && npm test && npm run docs',
-79 silly install resolved        docs: 'jsdoc2md $npm_package_config_mainFile > api.md',
-79 silly install resolved        lint: 'eslint .',
-79 silly install resolved        prepublish: 'npm run dist',
-79 silly install resolved        test: 'mocha',
-79 silly install resolved        watch: 'npm run watch-build & npm run watch-test',
-79 silly install resolved        'watch-build': 'npm run build -- --watch',
-79 silly install resolved        'watch-test': 'npm run test -- -w' },
-79 silly install resolved     keywords:
-79 silly install resolved      [ 'react',
-79 silly install resolved        'font-awesome',
-79 silly install resolved        'fontawesome',
-79 silly install resolved        'bootstrap',
-79 silly install resolved        'icons',
-79 silly install resolved        'fonts',
-79 silly install resolved        'icon',
-79 silly install resolved        'danawoodman',
-79 silly install resolved        'big',
-79 silly install resolved        'style',
-79 silly install resolved        'jsx',
-79 silly install resolved        'react-component',
-79 silly install resolved        'component' ],
-79 silly install resolved     author:
-79 silly install resolved      { name: 'Dana Woodman',
-79 silly install resolved        email: 'dana@danawoodman.com',
-79 silly install resolved        url: 'danawoodman.com' },
-79 silly install resolved     license: 'MIT',
-79 silly install resolved     devDependencies:
-79 silly install resolved      { babel: '^5.8.23',
-79 silly install resolved        chai: '^3.2.0',
-79 silly install resolved        eslint: '^1.2.1',
-79 silly install resolved        'eslint-plugin-nodeca': '^1.0.3',
-79 silly install resolved        'eslint-plugin-react': '^3.3.0',
-79 silly install resolved        'jsdoc-to-markdown': '^1.1.1',
-79 silly install resolved        jsdom: '^6.2.0',
-79 silly install resolved        mocha: '^2.2.5',
-79 silly install resolved        'mocha-jsdom': '^1.0.0',
-79 silly install resolved        'mocha-sinon': '^1.1.4',
-79 silly install resolved        sinon: '^1.16.1',
-79 silly install resolved        'sinon-chai': '^2.8.0' },
-79 silly install resolved     homepage: 'https://github.com/danawoodman/react-fontawesome#readme',
-79 silly install resolved     engines: { node: '>=0.10.0' },
-79 silly install resolved     dependencies: {},
-79 silly install resolved     peerDependencies: { react: '>=0.12.0' },
-79 silly install resolved     gitHead: 'f91701d16a57337657c1e027ac5f6bd9cb932f43',
-79 silly install resolved     _id: 'react-fontawesome@0.3.3',
-79 silly install resolved     _shasum: '6fa13ba05e38123c882fd48577d182c45cfe867e',
-79 silly install resolved     _from: 'react-fontawesome@*',
-79 silly install resolved     _npmVersion: '2.13.3',
-79 silly install resolved     _nodeVersion: '3.0.0',
-79 silly install resolved     _npmUser: { name: 'danawoodman', email: 'dana@danawoodman.com' },
-79 silly install resolved     maintainers: [ [Object] ],
-79 silly install resolved     dist:
-79 silly install resolved      { shasum: '6fa13ba05e38123c882fd48577d182c45cfe867e',
-79 silly install resolved        tarball: 'http://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz' },
-79 silly install resolved     directories: {},
-79 silly install resolved     _resolved: 'https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz' } ]
-80 info install react-fontawesome@0.3.3 into /Users/conner/projects/radiant-gallery
-81 info installOne react-fontawesome@0.3.3
-82 verbose installOne of react-fontawesome to /Users/conner/projects/radiant-gallery not in flight; installing
-83 verbose lock using /Users/conner/.npm/_locks/react-fontawesome-f8eb8c4ee1bd15b2.lock for /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-84 silly install write writing react-fontawesome 0.3.3 to /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-85 verbose unbuild node_modules/react-fontawesome
-86 silly gentlyRm /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome is being purged from base /Users/conner/projects/radiant-gallery
-87 verbose gentlyRm don't care about contents; nuking /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-88 verbose tar unpack /Users/conner/.npm/react-fontawesome/0.3.3/package.tgz
-89 verbose tar unpacking to /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-90 silly gentlyRm /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome is being purged
-91 verbose gentlyRm don't care about contents; nuking /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-92 silly gunzTarPerm modes [ '755', '644' ]
-93 silly gunzTarPerm extractEntry package.json
-94 silly gunzTarPerm extractEntry .npmignore
-95 silly gunzTarPerm extractEntry .yo-rc.json
-96 silly gunzTarPerm extractEntry changelog.md
-97 silly gunzTarPerm extractEntry lib/index.js
-98 silly gunzTarPerm extractEntry license
-99 silly gunzTarPerm extractEntry .eslintignore
-100 silly gunzTarPerm extractEntry readme.md
-101 verbose write writing to /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome/package.json
-102 info preinstall react-fontawesome@0.3.3
-103 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome/package.json
-104 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome/package.json
-105 silly install resolved []
-106 verbose about to build /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-107 info build /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-108 info linkStuff react-fontawesome@0.3.3
-109 silly linkStuff react-fontawesome@0.3.3 has /Users/conner/projects/radiant-gallery/node_modules as its parent node_modules
-110 verbose linkBins react-fontawesome@0.3.3
-111 verbose linkMans react-fontawesome@0.3.3
-112 verbose rebuildBundles react-fontawesome@0.3.3
-113 info install react-fontawesome@0.3.3
-114 info postinstall react-fontawesome@0.3.3
-115 verbose unlock done using /Users/conner/.npm/_locks/react-fontawesome-f8eb8c4ee1bd15b2.lock for /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome
-116 verbose validateInstall loading /Users/conner/projects/radiant-gallery/package.json for validation
-117 verbose stack Error: The package react@0.14.0 does not satisfy its siblings' peerDependencies requirements!
-117 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
-117 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
-117 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
-117 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-117 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-117 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-117 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-117 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-117 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-117 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-118 verbose cwd /Users/conner/projects/radiant-gallery
-119 error Darwin 15.0.0
-120 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "--save" "react-fontawesome"
-121 error node v4.2.1
-122 error npm  v2.14.7
-123 error code EPEERINVALID
-124 error peerinvalid The package react@0.14.0 does not satisfy its siblings' peerDependencies requirements!
-124 error peerinvalid Peer react-font-awesome@1.0.3 wants react@~0.11.2
-124 error peerinvalid Peer react-fontawesome@0.3.3 wants react@>=0.12.0
-124 error peerinvalid Peer react-redux@4.0.0 wants react@^0.14.0
-125 verbose exit [ 1, true ]
+26 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react-fontawesome/package.json
+27 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/react-redux/package.json
+28 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/redux/package.json
+29 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/sass-loader/package.json
+30 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/style-loader/package.json
+31 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/walk/package.json
+32 verbose installManyTop reading scoped package data from /Users/conner/projects/radiant-gallery/node_modules/webpack/package.json
+33 info package.json babel-core@5.8.29 No README data
+34 info package.json fs@0.0.2 fs is also the name of a node core module.
+35 info package.json fs@0.0.2 No description
+36 info package.json fs@0.0.2 No repository field.
+37 info package.json path@0.12.7 path is also the name of a node core module.
+38 info package.json walk@2.3.9 No license field.
+39 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/package.json
+40 silly cache add args [ 'redux-thunk', null ]
+41 verbose cache add spec redux-thunk
+42 silly cache add parsed spec Result {
+42 silly cache add   raw: 'redux-thunk',
+42 silly cache add   scope: null,
+42 silly cache add   name: 'redux-thunk',
+42 silly cache add   rawSpec: '',
+42 silly cache add   spec: '*',
+42 silly cache add   type: 'range' }
+43 silly addNamed redux-thunk@*
+44 verbose addNamed "*" is a valid semver range for redux-thunk
+45 silly addNameRange { name: 'redux-thunk', range: '*', hasData: false }
+46 silly mapToRegistry name redux-thunk
+47 silly mapToRegistry using default registry
+48 silly mapToRegistry registry https://registry.npmjs.org/
+49 silly mapToRegistry uri https://registry.npmjs.org/redux-thunk
+50 verbose addNameRange registry:https://registry.npmjs.org/redux-thunk not in flight; fetching
+51 verbose request uri https://registry.npmjs.org/redux-thunk
+52 verbose request no auth needed
+53 info attempt registry request try #1 at 1:57:38 PM
+54 verbose request id f84ae82ada3a75d4
+55 verbose etag "186QTL4G1IAU6Y1JGKDC7VFJV"
+56 http request GET https://registry.npmjs.org/redux-thunk
+57 http 200 https://registry.npmjs.org/redux-thunk
+58 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+58 verbose headers   etag: '"17DG7GR4QO4XI70TYJVZ6YVM5"',
+58 verbose headers   'content-type': 'application/json',
+58 verbose headers   'cache-control': 'max-age=60',
+58 verbose headers   'content-length': '9976',
+58 verbose headers   'accept-ranges': 'bytes',
+58 verbose headers   date: 'Sun, 25 Oct 2015 19:57:38 GMT',
+58 verbose headers   via: '1.1 varnish',
+58 verbose headers   age: '0',
+58 verbose headers   connection: 'keep-alive',
+58 verbose headers   'x-served-by': 'cache-sjc3135-SJC',
+58 verbose headers   'x-cache': 'MISS',
+58 verbose headers   'x-cache-hits': '0',
+58 verbose headers   'x-timer': 'S1445803058.590247,VS0,VE42',
+58 verbose headers   vary: 'Accept' }
+59 silly get cb [ 200,
+59 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+59 silly get     etag: '"17DG7GR4QO4XI70TYJVZ6YVM5"',
+59 silly get     'content-type': 'application/json',
+59 silly get     'cache-control': 'max-age=60',
+59 silly get     'content-length': '9976',
+59 silly get     'accept-ranges': 'bytes',
+59 silly get     date: 'Sun, 25 Oct 2015 19:57:38 GMT',
+59 silly get     via: '1.1 varnish',
+59 silly get     age: '0',
+59 silly get     connection: 'keep-alive',
+59 silly get     'x-served-by': 'cache-sjc3135-SJC',
+59 silly get     'x-cache': 'MISS',
+59 silly get     'x-cache-hits': '0',
+59 silly get     'x-timer': 'S1445803058.590247,VS0,VE42',
+59 silly get     vary: 'Accept' } ]
+60 verbose get saving redux-thunk to /Users/conner/.npm/registry.npmjs.org/redux-thunk/.cache.json
+61 silly addNameRange number 2 { name: 'redux-thunk', range: '*', hasData: true }
+62 silly addNameRange versions [ 'redux-thunk', [ '0.1.0', '1.0.0' ] ]
+63 silly addNamed redux-thunk@1.0.0
+64 verbose addNamed "1.0.0" is a plain semver version for redux-thunk
+65 silly mapToRegistry name redux-thunk
+66 silly mapToRegistry using default registry
+67 silly mapToRegistry registry https://registry.npmjs.org/
+68 silly mapToRegistry uri https://registry.npmjs.org/redux-thunk
+69 verbose addRemoteTarball https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz not in flight; adding
+70 verbose addRemoteTarball [ 'https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz',
+70 verbose addRemoteTarball   'e35544a10fcd9c9e3ba96083ac16c702394f4009' ]
+71 info retry fetch attempt 1 at 1:57:38 PM
+72 info attempt registry request try #1 at 1:57:38 PM
+73 http fetch GET https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz
+74 http fetch 200 https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz
+75 silly fetchAndShaCheck shasum e35544a10fcd9c9e3ba96083ac16c702394f4009
+76 verbose addTmpTarball /var/folders/_v/yf_qc4_n3c3_vlfjdsck8gkc0000gn/T/npm-14524-d563ce9a/registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz not in flight; adding
+77 verbose addTmpTarball already have metadata; skipping unpack for redux-thunk@1.0.0
+78 silly cache afterAdd redux-thunk@1.0.0
+79 verbose afterAdd /Users/conner/.npm/redux-thunk/1.0.0/package/package.json not in flight; writing
+80 verbose afterAdd /Users/conner/.npm/redux-thunk/1.0.0/package/package.json written
+81 silly install resolved [ { name: 'redux-thunk',
+81 silly install resolved     version: '1.0.0',
+81 silly install resolved     description: 'Thunk middleware for Redux.',
+81 silly install resolved     main: 'lib/index.js',
+81 silly install resolved     scripts:
+81 silly install resolved      { prepublish: 'rimraf lib && babel src --out-dir lib',
+81 silly install resolved        test: 'mocha --compilers js:babel/register --reporter spec test/*.js' },
+81 silly install resolved     repository:
+81 silly install resolved      { type: 'git',
+81 silly install resolved        url: 'https://github.com/gaearon/redux-thunk.git' },
+81 silly install resolved     homepage: 'https://github.com/gaearon/redux-thunk',
+81 silly install resolved     keywords: [ 'redux', 'thunk', 'middleware', 'redux-middleware', 'flux' ],
+81 silly install resolved     author: { name: 'Dan Abramov', email: 'dan.abramov@me.com' },
+81 silly install resolved     license: 'MIT',
+81 silly install resolved     devDependencies:
+81 silly install resolved      { babel: '^5.6.14',
+81 silly install resolved        'babel-core': '^5.6.15',
+81 silly install resolved        'babel-eslint': '^3.1.20',
+81 silly install resolved        chai: '^3.2.0',
+81 silly install resolved        eslint: '^0.24.0',
+81 silly install resolved        'eslint-config-airbnb': '0.0.6',
+81 silly install resolved        mocha: '^2.2.5',
+81 silly install resolved        rimraf: '^2.4.3' },
+81 silly install resolved     gitHead: '2240b0b389249f6e2ecd1b5385c1dd85ef812c73',
+81 silly install resolved     bugs: { url: 'https://github.com/gaearon/redux-thunk/issues' },
+81 silly install resolved     _id: 'redux-thunk@1.0.0',
+81 silly install resolved     _shasum: 'e35544a10fcd9c9e3ba96083ac16c702394f4009',
+81 silly install resolved     _from: 'redux-thunk@*',
+81 silly install resolved     _npmVersion: '2.11.0',
+81 silly install resolved     _nodeVersion: '2.2.1',
+81 silly install resolved     _npmUser: { name: 'gaearon', email: 'dan.abramov@gmail.com' },
+81 silly install resolved     dist:
+81 silly install resolved      { shasum: 'e35544a10fcd9c9e3ba96083ac16c702394f4009',
+81 silly install resolved        tarball: 'http://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz' },
+81 silly install resolved     maintainers: [ [Object] ],
+81 silly install resolved     directories: {},
+81 silly install resolved     _resolved: 'https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz' } ]
+82 info install redux-thunk@1.0.0 into /Users/conner/projects/radiant-gallery
+83 info installOne redux-thunk@1.0.0
+84 verbose installOne of redux-thunk to /Users/conner/projects/radiant-gallery not in flight; installing
+85 verbose lock using /Users/conner/.npm/_locks/redux-thunk-e0fb99df0fe47f79.lock for /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+86 silly install write writing redux-thunk 1.0.0 to /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+87 verbose unbuild node_modules/redux-thunk
+88 silly gentlyRm /Users/conner/projects/radiant-gallery/node_modules/redux-thunk is being purged from base /Users/conner/projects/radiant-gallery
+89 verbose gentlyRm don't care about contents; nuking /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+90 verbose tar unpack /Users/conner/.npm/redux-thunk/1.0.0/package.tgz
+91 verbose tar unpacking to /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+92 silly gentlyRm /Users/conner/projects/radiant-gallery/node_modules/redux-thunk is being purged
+93 verbose gentlyRm don't care about contents; nuking /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+94 silly gunzTarPerm modes [ '755', '644' ]
+95 silly gunzTarPerm extractEntry package.json
+96 silly gunzTarPerm extractEntry .npmignore
+97 silly gunzTarPerm extractEntry README.md
+98 silly gunzTarPerm extractEntry LICENSE.md
+99 silly gunzTarPerm extractEntry .travis.yml
+100 silly gunzTarPerm extractEntry .babelrc
+101 silly gunzTarPerm extractEntry .editorconfig
+102 silly gunzTarPerm extractEntry lib/index.js
+103 silly gunzTarPerm extractEntry .eslintrc
+104 silly gunzTarPerm extractEntry test/index.js
+105 verbose write writing to /Users/conner/projects/radiant-gallery/node_modules/redux-thunk/package.json
+106 info preinstall redux-thunk@1.0.0
+107 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/node_modules/redux-thunk/package.json
+108 verbose readDependencies loading dependencies from /Users/conner/projects/radiant-gallery/node_modules/redux-thunk/package.json
+109 silly install resolved []
+110 verbose about to build /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+111 info build /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+112 info linkStuff redux-thunk@1.0.0
+113 silly linkStuff redux-thunk@1.0.0 has /Users/conner/projects/radiant-gallery/node_modules as its parent node_modules
+114 verbose linkBins redux-thunk@1.0.0
+115 verbose linkMans redux-thunk@1.0.0
+116 verbose rebuildBundles redux-thunk@1.0.0
+117 info install redux-thunk@1.0.0
+118 info postinstall redux-thunk@1.0.0
+119 verbose unlock done using /Users/conner/.npm/_locks/redux-thunk-e0fb99df0fe47f79.lock for /Users/conner/projects/radiant-gallery/node_modules/redux-thunk
+120 verbose validateInstall loading /Users/conner/projects/radiant-gallery/package.json for validation
+121 verbose stack Error: The package react@0.14.0 does not satisfy its siblings' peerDependencies requirements!
+121 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+121 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
+121 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+121 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+121 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+121 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+121 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+121 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+121 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+121 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+122 verbose cwd /Users/conner/projects/radiant-gallery
+123 error Darwin 15.0.0
+124 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "i" "--save" "redux-thunk"
+125 error node v4.2.1
+126 error npm  v2.14.7
+127 error code EPEERINVALID
+128 error peerinvalid The package react@0.14.0 does not satisfy its siblings' peerDependencies requirements!
+128 error peerinvalid Peer react-font-awesome@1.0.3 wants react@~0.11.2
+128 error peerinvalid Peer react-fontawesome@0.3.3 wants react@>=0.12.0
+128 error peerinvalid Peer react-redux@4.0.0 wants react@^0.14.0
+129 verbose exit [ 1, true ]

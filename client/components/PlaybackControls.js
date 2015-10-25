@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
 import Icon from './Icon';
-import { nextAsset, pause, play, previousAsset } from '../actions/NavigationActions';
+import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
 
 const containerStyles = {
   display: 'flex',
@@ -20,7 +21,7 @@ const containerStyles = {
 const controlButtonStyles = {
   color: 'white',
   cursor: 'pointer',
-  fontSize: '20px',
+  fontSize: '18px',
   marginRight: '10px',
   opacity: 0.5,
   textShadow: '3px 0 5px #000',
@@ -28,11 +29,14 @@ const controlButtonStyles = {
 };
 
 class PlaybackControls extends Component {
-  state = { opacity: 0 };
+  state = { focus: false, opacity: 0 };
 
   componentDidMount() {
-    document.addEventListener('mousedown', this._makeVisible.bind(this));
-    document.addEventListener('mousemove', this._makeVisible.bind(this));
+    document.addEventListener('mousemove', this._onMouseMove.bind(this));
+
+    const domNode = findDOMNode(this);
+    domNode.addEventListener('mouseenter', () => { this.setState({ focus: true }); });
+    domNode.addEventListener('mouseleave', () => { this.setState({ focus: false }); });
   }
 
   render() {
@@ -60,25 +64,23 @@ class PlaybackControls extends Component {
   _getPlayPauseControl() {
     switch (this.props.playbackStatus) {
       case PLAYING:
-        return this._getControlButton('pause', pause);
+        return this._getControlButton('pause', togglePlayback);
 
       case PAUSED:
-        return this._getControlButton('play', play);
+        return this._getControlButton('play', togglePlayback);
 
       default:
         return null;
     }
   }
 
-  _makeVisible() {
-    this.setState({
-      opacity: 1
-    }, () => {
+  _onMouseMove() {
+    this.setState({ opacity: 1 }, () => {
       clearTimeout(this.opacityTimeout);
       this.opacityTimeout = setTimeout(() => {
-        this.setState({
-          opacity: 0
-        });
+        if (!this.state.focus) {
+          this.setState({ opacity: 0 });
+        }
       }, 3000);
     });
   }

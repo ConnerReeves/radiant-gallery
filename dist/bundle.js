@@ -58,17 +58,22 @@
 	
 	var _reactDom = __webpack_require__(175);
 	
-	var _componentsApp = __webpack_require__(319);
+	var _reduxThunk = __webpack_require__(319);
+	
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+	
+	var _componentsApp = __webpack_require__(320);
 	
 	var _componentsApp2 = _interopRequireDefault(_componentsApp);
 	
-	var _reducers = __webpack_require__(327);
+	var _reducers = __webpack_require__(329);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	__webpack_require__(329);
+	__webpack_require__(332);
 	
-	var store = (0, _redux.createStore)(_reducers2['default']);
+	var createThunkStore = (0, _redux.applyMiddleware)(_reduxThunk2['default'])(_redux.createStore);
+	var store = createThunkStore(_reducers2['default']);
 	
 	(0, _reactDom.render)(_react2['default'].createElement(
 	  _reactRedux.Provider,
@@ -39271,6 +39276,28 @@
 
 /***/ },
 /* 319 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports['default'] = thunkMiddleware;
+	
+	function thunkMiddleware(_ref) {
+	  var dispatch = _ref.dispatch;
+	  var getState = _ref.getState;
+	
+	  return function (next) {
+	    return function (action) {
+	      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+	    };
+	  };
+	}
+	
+	module.exports = exports['default'];
+
+/***/ },
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39293,11 +39320,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _AssetController = __webpack_require__(320);
+	var _AssetController = __webpack_require__(321);
 	
 	var _AssetController2 = _interopRequireDefault(_AssetController);
 	
-	var _PlaybackControls = __webpack_require__(323);
+	var _PlaybackControls = __webpack_require__(324);
 	
 	var _PlaybackControls2 = _interopRequireDefault(_PlaybackControls);
 	
@@ -39329,7 +39356,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39354,7 +39381,7 @@
 	
 	var _reactRedux = __webpack_require__(166);
 	
-	var _Image = __webpack_require__(321);
+	var _Image = __webpack_require__(322);
 	
 	var _Image2 = _interopRequireDefault(_Image);
 	
@@ -39385,7 +39412,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate) {'use strict';
@@ -39480,10 +39507,10 @@
 	  src: _react2['default'].PropTypes.string.isRequired
 	};
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(322).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(323).setImmediate))
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {"use strict";
@@ -39564,10 +39591,10 @@
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function (id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(322).setImmediate, __webpack_require__(322).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(323).setImmediate, __webpack_require__(323).clearImmediate))
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39590,17 +39617,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactDom = __webpack_require__(175);
+	
 	var _redux = __webpack_require__(157);
 	
 	var _reactRedux = __webpack_require__(166);
 	
-	var _constantsPlaybackStatuses = __webpack_require__(333);
+	var _constantsPlaybackStatuses = __webpack_require__(325);
 	
-	var _Icon = __webpack_require__(324);
+	var _Icon = __webpack_require__(326);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
-	var _actionsNavigationActions = __webpack_require__(325);
+	var _actionsPlaybackActions = __webpack_require__(327);
 	
 	var containerStyles = {
 	  display: 'flex',
@@ -39616,7 +39645,7 @@
 	var controlButtonStyles = {
 	  color: 'white',
 	  cursor: 'pointer',
-	  fontSize: '20px',
+	  fontSize: '18px',
 	  marginRight: '10px',
 	  opacity: 0.5,
 	  textShadow: '3px 0 5px #000',
@@ -39631,14 +39660,23 @@
 	
 	    _get(Object.getPrototypeOf(PlaybackControls.prototype), 'constructor', this).apply(this, arguments);
 	
-	    this.state = { opacity: 0 };
+	    this.state = { focus: false, opacity: 0 };
 	  }
 	
 	  _createClass(PlaybackControls, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      document.addEventListener('mousedown', this._makeVisible.bind(this));
-	      document.addEventListener('mousemove', this._makeVisible.bind(this));
+	      var _this = this;
+	
+	      document.addEventListener('mousemove', this._onMouseMove.bind(this));
+	
+	      var domNode = (0, _reactDom.findDOMNode)(this);
+	      domNode.addEventListener('mouseenter', function () {
+	        _this.setState({ focus: true });
+	      });
+	      domNode.addEventListener('mouseleave', function () {
+	        _this.setState({ focus: false });
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -39646,9 +39684,9 @@
 	      return _react2['default'].createElement(
 	        'div',
 	        { style: Object.assign({}, containerStyles, { opacity: this.state.opacity }) },
-	        this._getControlButton('backward', _actionsNavigationActions.previousAsset),
+	        this._getControlButton('backward', _actionsPlaybackActions.previousAsset),
 	        this._getPlayPauseControl(),
-	        this._getControlButton('forward', _actionsNavigationActions.nextAsset)
+	        this._getControlButton('forward', _actionsPlaybackActions.nextAsset)
 	      );
 	    }
 	  }, {
@@ -39667,28 +39705,26 @@
 	    value: function _getPlayPauseControl() {
 	      switch (this.props.playbackStatus) {
 	        case _constantsPlaybackStatuses.PLAYING:
-	          return this._getControlButton('pause', _actionsNavigationActions.pause);
+	          return this._getControlButton('pause', _actionsPlaybackActions.togglePlayback);
 	
 	        case _constantsPlaybackStatuses.PAUSED:
-	          return this._getControlButton('play', _actionsNavigationActions.play);
+	          return this._getControlButton('play', _actionsPlaybackActions.togglePlayback);
 	
 	        default:
 	          return null;
 	      }
 	    }
 	  }, {
-	    key: '_makeVisible',
-	    value: function _makeVisible() {
-	      var _this = this;
+	    key: '_onMouseMove',
+	    value: function _onMouseMove() {
+	      var _this2 = this;
 	
-	      this.setState({
-	        opacity: 1
-	      }, function () {
-	        clearTimeout(_this.opacityTimeout);
-	        _this.opacityTimeout = setTimeout(function () {
-	          _this.setState({
-	            opacity: 0
-	          });
+	      this.setState({ opacity: 1 }, function () {
+	        clearTimeout(_this2.opacityTimeout);
+	        _this2.opacityTimeout = setTimeout(function () {
+	          if (!_this2.state.focus) {
+	            _this2.setState({ opacity: 0 });
+	          }
 	        }, 3000);
 	      });
 	    }
@@ -39705,7 +39741,21 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 324 */
+/* 325 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var PLAYING = 'PLAYING';
+	exports.PLAYING = PLAYING;
+	var PAUSED = 'PAUSED';
+	exports.PAUSED = PAUSED;
+
+/***/ },
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39760,7 +39810,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 325 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39771,15 +39821,21 @@
 	exports.nextAsset = nextAsset;
 	exports.pause = pause;
 	exports.play = play;
+	exports.togglePlayback = togglePlayback;
 	exports.previousAsset = previousAsset;
 	
-	var _constantsActionTypes = __webpack_require__(326);
+	var _constantsActionTypes = __webpack_require__(328);
+	
+	var _constantsPlaybackStatuses = __webpack_require__(325);
+	
+	var playbackInterval = undefined;
 	
 	function nextAsset() {
 	  return { type: _constantsActionTypes.NEXT_ASSET };
 	}
 	
 	function pause() {
+	  clearInterval(playbackInterval);
 	  return { type: _constantsActionTypes.PAUSE };
 	}
 	
@@ -39787,12 +39843,34 @@
 	  return { type: _constantsActionTypes.PLAY };
 	}
 	
+	function togglePlayback() {
+	  var _this = this;
+	
+	  return function (dispatch, getState) {
+	    var _getState = getState();
+	
+	    var playbackStatus = _getState.playbackStatus;
+	
+	    switch (playbackStatus) {
+	      case _constantsPlaybackStatuses.PLAYING:
+	        dispatch(pause());
+	        break;
+	
+	      case _constantsPlaybackStatuses.PAUSED:
+	        dispatch(play());
+	        dispatch(nextAsset());
+	        playbackInterval = setInterval(dispatch.bind(_this, nextAsset()), 5000);
+	        break;
+	    }
+	  };
+	}
+	
 	function previousAsset() {
 	  return { type: _constantsActionTypes.PREVIOUS_ASSET };
 	}
 
 /***/ },
-/* 326 */
+/* 328 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39810,7 +39888,7 @@
 	exports.PREVIOUS_ASSET = PREVIOUS_ASSET;
 
 /***/ },
-/* 327 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39821,9 +39899,9 @@
 	
 	var _redux = __webpack_require__(157);
 	
-	var _AssetReducers = __webpack_require__(328);
+	var _AssetReducers = __webpack_require__(330);
 	
-	var _PlaybackReducers = __webpack_require__(334);
+	var _PlaybackReducers = __webpack_require__(331);
 	
 	exports['default'] = (0, _redux.combineReducers)({
 	  currentAsset: _AssetReducers.currentAsset,
@@ -39832,7 +39910,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 328 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39842,34 +39920,22 @@
 	});
 	exports.currentAsset = currentAsset;
 	
-	var _constantsActionTypes = __webpack_require__(326);
+	var _constantsActionTypes = __webpack_require__(328);
+	
+	var _actionsPlaybackActions = __webpack_require__(327);
 	
 	var assets = window.assets || [];
 	var currentAssetIndex = 0;
-	var playbackInterval = undefined;
 	
 	function currentAsset(state, action) {
 	  if (state === undefined) state = '';
 	
 	  switch (action.type) {
 	    case _constantsActionTypes.NEXT_ASSET:
-	      clearInterval(playbackInterval);
 	      currentAssetIndex = currentAssetIndex === assets.length - 1 ? 0 : currentAssetIndex + 1;
 	      break;
 	
-	    case _constantsActionTypes.PAUSE:
-	      clearInterval(playbackInterval);
-	      break;
-	
-	    case _constantsActionTypes.PLAY:
-	      //TODO: Need to use a thunk here...
-	      // playbackInterval = setInterval(() => {
-	      //   debugger;
-	      // }, 4000);
-	      break;
-	
 	    case _constantsActionTypes.PREVIOUS_ASSET:
-	      clearInterval(playbackInterval);
 	      currentAssetIndex = currentAssetIndex === 0 ? assets.length - 1 : currentAssetIndex - 1;
 	      break;
 	  }
@@ -39878,16 +39944,46 @@
 	}
 
 /***/ },
-/* 329 */
+/* 331 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.playbackStatus = playbackStatus;
+	
+	var _constantsActionTypes = __webpack_require__(328);
+	
+	var _constantsPlaybackStatuses = __webpack_require__(325);
+	
+	function playbackStatus(state, action) {
+	  if (state === undefined) state = _constantsPlaybackStatuses.PAUSED;
+	
+	  switch (action.type) {
+	    case _constantsActionTypes.PAUSE:
+	      return _constantsPlaybackStatuses.PAUSED;
+	
+	    case _constantsActionTypes.PLAY:
+	      return _constantsPlaybackStatuses.PLAYING;
+	
+	    default:
+	      return state;
+	  }
+	}
+
+/***/ },
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(330);
+	var content = __webpack_require__(333);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(332)(content, {});
+	var update = __webpack_require__(335)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -39904,10 +40000,10 @@
 	}
 
 /***/ },
-/* 330 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(331)();
+	exports = module.exports = __webpack_require__(334)();
 	// imports
 	
 	
@@ -39918,7 +40014,7 @@
 
 
 /***/ },
-/* 331 */
+/* 334 */
 /***/ function(module, exports) {
 
 	/*
@@ -39973,7 +40069,7 @@
 	};
 
 /***/ },
-/* 332 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -40196,52 +40292,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 333 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var PLAYING = 'PLAYING';
-	exports.PLAYING = PLAYING;
-	var PAUSED = 'PAUSED';
-	exports.PAUSED = PAUSED;
-
-/***/ },
-/* 334 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports.playbackStatus = playbackStatus;
-	
-	var _constantsActionTypes = __webpack_require__(326);
-	
-	var _constantsPlaybackStatuses = __webpack_require__(333);
-	
-	function playbackStatus(state, action) {
-	  if (state === undefined) state = _constantsPlaybackStatuses.PAUSED;
-	
-	  switch (action.type) {
-	    case _constantsActionTypes.NEXT_ASSET:
-	    case _constantsActionTypes.PAUSE:
-	    case _constantsActionTypes.PREVIOUS_ASSET:
-	      return _constantsPlaybackStatuses.PAUSED;
-	
-	    case _constantsActionTypes.PLAY:
-	      return _constantsPlaybackStatuses.PLAYING;
-	
-	    default:
-	      return state;
-	  }
-	}
 
 /***/ }
 /******/ ]);
