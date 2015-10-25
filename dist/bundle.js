@@ -39572,39 +39572,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(322).setImmediate, __webpack_require__(322).clearImmediate))
 
 /***/ },
-/* 323 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports.currentAsset = currentAsset;
-	
-	var _constantsActionTypes = __webpack_require__(324);
-	
-	var currentAssetIndex = 0;
-	
-	function currentAsset(state, action) {
-	  if (state === undefined) state = '';
-	
-	  switch (action.type) {
-	    case _constantsActionTypes.NEXT_ASSET:
-	      currentAssetIndex = currentAssetIndex === assets.length - 1 ? 0 : currentAssetIndex + 1;
-	      break;
-	
-	    case _constantsActionTypes.PREVIOUS_ASSET:
-	      currentAssetIndex = currentAssetIndex === 0 ? assets.length - 1 : currentAssetIndex - 1;
-	      break;
-	
-	    default:
-	  }
-	
-	  return assets[currentAssetIndex] || state;
-	}
-
-/***/ },
+/* 323 */,
 /* 324 */
 /***/ function(module, exports) {
 
@@ -39972,12 +39940,39 @@
 	
 	var _redux = __webpack_require__(309);
 	
-	var _NavigationReducers = __webpack_require__(323);
+	var _AssetReducers = __webpack_require__(331);
 	
 	exports['default'] = (0, _redux.combineReducers)({
-	  currentAsset: _NavigationReducers.currentAsset
+	  currentAsset: _AssetReducers.currentAsset
 	});
 	module.exports = exports['default'];
+
+/***/ },
+/* 331 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.currentAsset = currentAsset;
+	
+	var _constantsActionTypes = __webpack_require__(324);
+	
+	var assets = window.assets || [];
+	var currentAssetIndex = 0;
+	
+	function currentAsset(state, action) {
+	  if (state === undefined) state = '';
+	
+	  currentAssetIndex = ({
+	    NEXT_ASSET: currentAssetIndex === assets.length - 1 ? 0 : currentAssetIndex + 1,
+	    PREVIOUS_ASSET: currentAssetIndex === 0 ? assets.length - 1 : currentAssetIndex - 1
+	  })[action.type] || currentAssetIndex;
+	
+	  return assets[currentAssetIndex] || state;
+	}
 
 /***/ }
 /******/ ]);
