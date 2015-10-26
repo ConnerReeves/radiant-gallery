@@ -1,5 +1,4 @@
 import { NEXT_ASSET, PAUSE, PLAY, PREVIOUS_ASSET } from '../constants/ActionTypes';
-import { nextAsset } from '../actions/PlaybackActions';
 
 const assets = window.assets || [];
 let currentAssetIndex = 0;

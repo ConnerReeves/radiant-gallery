@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import ControlButton from './ControlButton';
+import FrequencyControl from './FrequencyControl';
+
 import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
-import Icon from './Icon';
 import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
 
 const containerStyles = {
-  display: 'flex',
-  justifyContent: 'space-between',
   position: 'fixed',
-  top: '10px',
-  left: '10px',
   transition: 'opacity 0.5s ease-in-out',
-  width: '100px',
+  top: '10px',
   zIndex: 1
 };
 
-const controlButtonStyles = {
-  color: 'white',
-  cursor: 'pointer',
-  fontSize: '18px',
-  marginRight: '10px',
-  opacity: 0.5,
-  textShadow: '3px 0 5px #000',
-  WebkitUserSelect: 'none',
-};
+const leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' });
+const rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
 
 class PlaybackControls extends Component {
   state = { focus: false, opacity: 0 };
@@ -41,36 +31,26 @@ class PlaybackControls extends Component {
 
   render() {
     return (
-      <div style={ Object.assign({}, containerStyles, { opacity: this.state.opacity }) }>
-        { this._getControlButton('backward', previousAsset) }
-        { this._getPlayPauseControl() }
-        { this._getControlButton('forward', nextAsset) }
+      <div>
+        <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
+          <ControlButton icon="backward" action= { previousAsset } />
+          <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } />
+          <ControlButton icon="forward" action= { nextAsset } />
+        </div>
+        <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
+          <FrequencyControl />
+        </div>
       </div>
     );
   }
 
-  _getControlButton(name, action) {
-    const iconProps = {
-      name,
-      onClick: bindActionCreators(action, this.props.dispatch),
-      style: controlButtonStyles
-    };
-
-    return (
-      <Icon { ...iconProps } />
-    );
-  }
-
-  _getPlayPauseControl() {
+  _getPlaybackToggleIcon() {
     switch (this.props.playbackStatus) {
-      case PLAYING:
-        return this._getControlButton('pause', togglePlayback);
-
       case PAUSED:
-        return this._getControlButton('play', togglePlayback);
+        return 'play';
 
-      default:
-        return null;
+      case PLAYING:
+        return 'pause';
     }
   }
 

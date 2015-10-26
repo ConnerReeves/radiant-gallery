@@ -17,6 +17,10 @@ const imgStyles = {
 };
 
 export default class Image extends Component {
+  static propTypes = {
+    src: React.PropTypes.string.isRequired
+  };
+
   state = { opacityToggle: true };
 
   componentWillReceiveProps(newProps) {
@@ -48,7 +52,3 @@ export default class Image extends Component {
     return src ? <img key={ src } src={ src } style={ style } /> : null;
   }
 }
-
-Image.propTypes = {
-  src: React.PropTypes.string.isRequired
-};

@@ -39496,16 +39496,18 @@
 	    value: function _getImg(src, style) {
 	      return src ? _react2['default'].createElement('img', { key: src, src: src, style: style }) : null;
 	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
+	      src: _react2['default'].PropTypes.string.isRequired
+	    },
+	    enumerable: true
 	  }]);
 	
 	  return Image;
 	})(_react.Component);
 	
 	exports['default'] = Image;
-	
-	Image.propTypes = {
-	  src: _react2['default'].PropTypes.string.isRequired
-	};
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(323).setImmediate))
 
@@ -39619,38 +39621,29 @@
 	
 	var _reactDom = __webpack_require__(175);
 	
-	var _redux = __webpack_require__(157);
-	
 	var _reactRedux = __webpack_require__(166);
 	
+	var _ControlButton = __webpack_require__(336);
+	
+	var _ControlButton2 = _interopRequireDefault(_ControlButton);
+	
+	var _FrequencyControl = __webpack_require__(337);
+	
+	var _FrequencyControl2 = _interopRequireDefault(_FrequencyControl);
+	
 	var _constantsPlaybackStatuses = __webpack_require__(325);
-	
-	var _Icon = __webpack_require__(326);
-	
-	var _Icon2 = _interopRequireDefault(_Icon);
 	
 	var _actionsPlaybackActions = __webpack_require__(327);
 	
 	var containerStyles = {
-	  display: 'flex',
-	  justifyContent: 'space-between',
 	  position: 'fixed',
-	  top: '10px',
-	  left: '10px',
 	  transition: 'opacity 0.5s ease-in-out',
-	  width: '100px',
+	  top: '10px',
 	  zIndex: 1
 	};
 	
-	var controlButtonStyles = {
-	  color: 'white',
-	  cursor: 'pointer',
-	  fontSize: '18px',
-	  marginRight: '10px',
-	  opacity: 0.5,
-	  textShadow: '3px 0 5px #000',
-	  WebkitUserSelect: 'none'
-	};
+	var leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' });
+	var rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
 	
 	var PlaybackControls = (function (_Component) {
 	  _inherits(PlaybackControls, _Component);
@@ -39683,35 +39676,30 @@
 	    value: function render() {
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: Object.assign({}, containerStyles, { opacity: this.state.opacity }) },
-	        this._getControlButton('backward', _actionsPlaybackActions.previousAsset),
-	        this._getPlayPauseControl(),
-	        this._getControlButton('forward', _actionsPlaybackActions.nextAsset)
+	        null,
+	        _react2['default'].createElement(
+	          'div',
+	          { style: Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) },
+	          _react2['default'].createElement(_ControlButton2['default'], { icon: 'backward', action: _actionsPlaybackActions.previousAsset }),
+	          _react2['default'].createElement(_ControlButton2['default'], { icon: this._getPlaybackToggleIcon(), action: _actionsPlaybackActions.togglePlayback }),
+	          _react2['default'].createElement(_ControlButton2['default'], { icon: 'forward', action: _actionsPlaybackActions.nextAsset })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { style: Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) },
+	          _react2['default'].createElement(_FrequencyControl2['default'], null)
+	        )
 	      );
 	    }
 	  }, {
-	    key: '_getControlButton',
-	    value: function _getControlButton(name, action) {
-	      var iconProps = {
-	        name: name,
-	        onClick: (0, _redux.bindActionCreators)(action, this.props.dispatch),
-	        style: controlButtonStyles
-	      };
-	
-	      return _react2['default'].createElement(_Icon2['default'], iconProps);
-	    }
-	  }, {
-	    key: '_getPlayPauseControl',
-	    value: function _getPlayPauseControl() {
+	    key: '_getPlaybackToggleIcon',
+	    value: function _getPlaybackToggleIcon() {
 	      switch (this.props.playbackStatus) {
-	        case _constantsPlaybackStatuses.PLAYING:
-	          return this._getControlButton('pause', _actionsPlaybackActions.togglePlayback);
-	
 	        case _constantsPlaybackStatuses.PAUSED:
-	          return this._getControlButton('play', _actionsPlaybackActions.togglePlayback);
+	          return 'play';
 	
-	        default:
-	          return null;
+	        case _constantsPlaybackStatuses.PLAYING:
+	          return 'pause';
 	      }
 	    }
 	  }, {
@@ -39796,17 +39784,19 @@
 	
 	      return _react2['default'].createElement('i', iconProps);
 	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
+	      name: _react2['default'].PropTypes.string.isRequired,
+	      onClick: _react2['default'].PropTypes.func
+	    },
+	    enumerable: true
 	  }]);
 	
 	  return Icon;
 	})(_react.Component);
 	
 	exports['default'] = Icon;
-	
-	Icon.propTypes = {
-	  name: _react2['default'].PropTypes.string.isRequired,
-	  onClick: _react2['default'].PropTypes.func
-	};
 	module.exports = exports['default'];
 
 /***/ },
@@ -39818,11 +39808,10 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	exports.changeFrequency = changeFrequency;
 	exports.nextAsset = nextAsset;
-	exports.pause = pause;
-	exports.play = play;
-	exports.togglePlayback = togglePlayback;
 	exports.previousAsset = previousAsset;
+	exports.togglePlayback = togglePlayback;
 	
 	var _constantsActionTypes = __webpack_require__(328);
 	
@@ -39830,43 +39819,49 @@
 	
 	var playbackInterval = undefined;
 	
+	var restartPlayback = function restartPlayback(dispatch, frequency) {
+	  stopPlayback();
+	  playbackInterval = setInterval(dispatch.bind(undefined, nextAsset()), frequency);
+	};
+	
+	var stopPlayback = function stopPlayback() {
+	  clearInterval(playbackInterval);
+	};
+	
+	function changeFrequency(frequency) {
+	  return function (dispatch, getState) {
+	    dispatch({ type: _constantsActionTypes.CHANGE_FREQUENCY, frequency: frequency });
+	    restartPlayback(dispatch, frequency);
+	  };
+	}
+	
 	function nextAsset() {
 	  return { type: _constantsActionTypes.NEXT_ASSET };
 	}
 	
-	function pause() {
-	  clearInterval(playbackInterval);
-	  return { type: _constantsActionTypes.PAUSE };
-	}
-	
-	function play() {
-	  return { type: _constantsActionTypes.PLAY };
+	function previousAsset() {
+	  return { type: _constantsActionTypes.PREVIOUS_ASSET };
 	}
 	
 	function togglePlayback() {
-	  var _this = this;
-	
 	  return function (dispatch, getState) {
 	    var _getState = getState();
 	
+	    var frequency = _getState.frequency;
 	    var playbackStatus = _getState.playbackStatus;
 	
 	    switch (playbackStatus) {
 	      case _constantsPlaybackStatuses.PLAYING:
-	        dispatch(pause());
+	        stopPlayback();
+	        dispatch({ type: _constantsActionTypes.PAUSE });
 	        break;
 	
 	      case _constantsPlaybackStatuses.PAUSED:
-	        dispatch(play());
-	        dispatch(nextAsset());
-	        playbackInterval = setInterval(dispatch.bind(_this, nextAsset()), 5000);
+	        restartPlayback(dispatch, frequency);
+	        dispatch({ type: _constantsActionTypes.PLAY });
 	        break;
 	    }
 	  };
-	}
-	
-	function previousAsset() {
-	  return { type: _constantsActionTypes.PREVIOUS_ASSET };
 	}
 
 /***/ },
@@ -39878,6 +39873,8 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	var CHANGE_FREQUENCY = 'CHANGE_FREQUENCY';
+	exports.CHANGE_FREQUENCY = CHANGE_FREQUENCY;
 	var NEXT_ASSET = 'NEXT_ASSET';
 	exports.NEXT_ASSET = NEXT_ASSET;
 	var PAUSE = 'PAUSE';
@@ -39905,6 +39902,7 @@
 	
 	exports['default'] = (0, _redux.combineReducers)({
 	  currentAsset: _AssetReducers.currentAsset,
+	  frequency: _PlaybackReducers.frequency,
 	  playbackStatus: _PlaybackReducers.playbackStatus
 	});
 	module.exports = exports['default'];
@@ -39921,8 +39919,6 @@
 	exports.currentAsset = currentAsset;
 	
 	var _constantsActionTypes = __webpack_require__(328);
-	
-	var _actionsPlaybackActions = __webpack_require__(327);
 	
 	var assets = window.assets || [];
 	var currentAssetIndex = 0;
@@ -39953,6 +39949,7 @@
 	  value: true
 	});
 	exports.playbackStatus = playbackStatus;
+	exports.frequency = frequency;
 	
 	var _constantsActionTypes = __webpack_require__(328);
 	
@@ -39967,6 +39964,18 @@
 	
 	    case _constantsActionTypes.PLAY:
 	      return _constantsPlaybackStatuses.PLAYING;
+	
+	    default:
+	      return state;
+	  }
+	}
+	
+	function frequency(state, action) {
+	  if (state === undefined) state = 5000;
+	
+	  switch (action.type) {
+	    case _constantsActionTypes.CHANGE_FREQUENCY:
+	      return action.frequency;
 	
 	    default:
 	      return state;
@@ -40292,6 +40301,228 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 336 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(175);
+	
+	var _redux = __webpack_require__(157);
+	
+	var _reactRedux = __webpack_require__(166);
+	
+	var _constantsPlaybackStatuses = __webpack_require__(325);
+	
+	var _Icon = __webpack_require__(326);
+	
+	var _Icon2 = _interopRequireDefault(_Icon);
+	
+	var controlButtonStyles = {
+	  color: 'white',
+	  cursor: 'pointer',
+	  fontSize: '18px',
+	  opacity: 0.6,
+	  textAlign: 'center',
+	  textShadow: '3px 0 5px #000',
+	  WebkitUserSelect: 'none',
+	  width: '33px'
+	};
+	
+	var ControlButton = (function (_Component) {
+	  _inherits(ControlButton, _Component);
+	
+	  function ControlButton() {
+	    _classCallCheck(this, ControlButton);
+	
+	    _get(Object.getPrototypeOf(ControlButton.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(ControlButton, [{
+	    key: 'render',
+	    value: function render() {
+	      var iconProps = {
+	        name: this.props.icon,
+	        onClick: (0, _redux.bindActionCreators)(this.props.action, this.props.dispatch),
+	        style: controlButtonStyles
+	      };
+	
+	      return _react2['default'].createElement(_Icon2['default'], iconProps);
+	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
+	      icon: _react2['default'].PropTypes.string.isRequired,
+	      action: _react2['default'].PropTypes.func.isRequired
+	    },
+	    enumerable: true
+	  }]);
+	
+	  return ControlButton;
+	})(_react.Component);
+	
+	exports['default'] = (0, _reactRedux.connect)(function (state) {
+	  return state;
+	})(ControlButton);
+	module.exports = exports['default'];
+
+/***/ },
+/* 337 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(166);
+	
+	var _redux = __webpack_require__(157);
+	
+	var _actionsPlaybackActions = __webpack_require__(327);
+	
+	var _Icon = __webpack_require__(326);
+	
+	var _Icon2 = _interopRequireDefault(_Icon);
+	
+	var containerStyles = {
+	  opacity: 0.6
+	};
+	
+	var iconStyles = {
+	  color: 'white',
+	  fontSize: '18px',
+	  textShadow: '3px 0 5px #000',
+	  verticalAlign: 'middle',
+	  WebkitUserSelect: 'none'
+	};
+	
+	var selectStyles = {
+	  background: '#FFF',
+	  border: 'none',
+	  borderRadius: '3px',
+	  boxShadow: '0 0 10px 1px #000',
+	  height: '20px',
+	  marginLeft: '10px',
+	  padding: '0 5px',
+	  width: '90px'
+	};
+	
+	var FrequencyControl = (function (_Component) {
+	  _inherits(FrequencyControl, _Component);
+	
+	  function FrequencyControl() {
+	    _classCallCheck(this, FrequencyControl);
+	
+	    _get(Object.getPrototypeOf(FrequencyControl.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(FrequencyControl, [{
+	    key: 'render',
+	    value: function render() {
+	      var iconProps = {
+	        name: 'clock-o',
+	        style: iconStyles
+	      };
+	
+	      var selectProps = {
+	        onChange: this._changeFrequency.bind(this),
+	        style: selectStyles,
+	        value: this.props.frequency
+	      };
+	
+	      return _react2['default'].createElement(
+	        'div',
+	        { style: containerStyles },
+	        _react2['default'].createElement(_Icon2['default'], iconProps),
+	        _react2['default'].createElement(
+	          'select',
+	          selectProps,
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 5000 },
+	            '5 Seconds'
+	          ),
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 10000 },
+	            '10 Seconds'
+	          ),
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 30000 },
+	            '30 Seconds'
+	          ),
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 60000 },
+	            '1 Minute'
+	          ),
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 300000 },
+	            '5 Minutes'
+	          ),
+	          _react2['default'].createElement(
+	            'option',
+	            { value: 600000 },
+	            '10 Minutes'
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: '_changeFrequency',
+	    value: function _changeFrequency(event) {
+	      var boundAction = (0, _redux.bindActionCreators)(_actionsPlaybackActions.changeFrequency, this.props.dispatch);
+	      boundAction(+event.target.value);
+	    }
+	  }]);
+	
+	  return FrequencyControl;
+	})(_react.Component);
+	
+	exports['default'] = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    frequency: state.frequency
+	  };
+	})(FrequencyControl);
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
