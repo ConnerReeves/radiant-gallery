@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function(req, res) {
   fs.readdir(assetDir, function(err, assets) {
-    var allowedExtensions = ['.jpg'];
+    var allowedExtensions = ['.jpg','.mp4'];
 
     assets = _.filter(assets, function(asset) {
       return _.contains(allowedExtensions, path.extname(asset));
