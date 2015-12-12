@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 
 const imgStyles = {
-  bottom: '-50%',
-  height: 'auto',
-  left:'-50%',
-  margin: 'auto',
-  maxHeight: '100%',
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
   maxWidth: '100%',
-  minHeight: '100%',
-  minWidth: '100%',
-  position: 'absolute',
-  right: '-50%',
-  top: '-50%',
-  transition: 'opacity 1s ease-in-out',
-  width: 'auto'
+  maxHeight: '100%',
+  transform: 'translate(-50%, -50%)',
+  transition: 'opacity 1s ease-in-out'
 };
 
 export default class Image extends Component {
@@ -49,6 +43,7 @@ export default class Image extends Component {
   }
 
   _getImg(src, style) {
-    return src ? <img key={ src } src={ src } style={ style } /> : null;
+    const imgProps = { key: src, src, style };
+    return src ? <img { ...imgProps } /> : null;
   }
 }

@@ -6,6 +6,8 @@ var fs = require('fs');
 var path = require('path');
 
 var assetDir = process.argv[process.argv.length - 1];
+console.log('\nServing: ' + assetDir);
+
 app.use(express.static(assetDir));
 app.use(express.static('dist'));
 
