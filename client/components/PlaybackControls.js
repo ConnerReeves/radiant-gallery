@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import ControlButton from './ControlButton';
 import FrequencyControl from './FrequencyControl';
-
 import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
 import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
+import { isVideo } from '../utils/AppUtils';
 
 const containerStyles = {
   position: 'fixed',
@@ -20,12 +20,6 @@ const leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' })
 const rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
 
 class PlaybackControls extends Component {
-  static propTypes = {
-    disableSkipForward: PropTypes.bool.isRequired,
-    disableSkipBackward: PropTypes.bool.isRequired,
-    hide: PropTypes.bool.isRequired
-  };
-
   state = { focus: false, opacity: 0 };
 
   componentDidMount() {
@@ -37,27 +31,39 @@ class PlaybackControls extends Component {
   }
 
   render() {
-    return this.props.hide ? null : (
+    return (
       <div>
-        <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
-          <ControlButton icon="backward" action= { previousAsset } disabled={ this.props.disableSkipBackward } />
-          <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } disabled={ false } />
-          <ControlButton icon="forward" action= { nextAsset } disabled={ this.props.disableSkipForward } />
-        </div>
-        <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
-          <FrequencyControl />
-        </div>
+        { this._getPlaybackControls() }
+        { this._getFrequencyControls() }
+      </div>
+    );
+  }
+
+  _getPlaybackControls() {
+    return (
+      <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
+        <ControlButton icon="backward" action= { () => previousAsset(this.props.maxAssetIndex) } />
+        <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } disabled={ isVideo(this.props.currentAssetPath) } />
+        <ControlButton icon="forward" action= { () => nextAsset(this.props.maxAssetIndex) } />
+      </div>
+    );
+  }
+
+  _getFrequencyControls() {
+    return isVideo(this.props.currentAssetPath) ? null : (
+      <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
+        <FrequencyControl />
       </div>
     );
   }
 
   _getPlaybackToggleIcon() {
-    switch (this.props.playbackStatus) {
-      case PAUSED:
-        return 'play';
-
-      case PLAYING:
-        return 'pause';
+    if (isVideo(this.props.currentAssetPath)) {
+      return 'video-camera';
+    } else if (this.props.playbackStatus === PLAYING) {
+      return 'pause';
+    } else {
+      return 'play';
     }
   }
 
@@ -73,6 +79,16 @@ class PlaybackControls extends Component {
   }
 }
 
-export default connect(state => ({
-  playbackStatus: state.playbackStatus
-}))(PlaybackControls);
+function mapStateToProps(state) {
+  const { currentAssetIndex, manifest, playbackStatus } = state;
+  const currentAsset = manifest[currentAssetIndex];
+  const currentAssetPath = currentAsset && currentAsset.path;
+
+  return {
+    currentAssetPath,
+    maxAssetIndex: manifest.length - 1,
+    playbackStatus
+  };
+}
+
+export default connect(mapStateToProps)(PlaybackControls);

@@ -20,14 +20,14 @@ const disabledControlButtonStyles = { opacity: 0.1, ...controlButtonStyles };
 
 class ControlButton extends Component {
   static propTypes = {
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
     icon: PropTypes.string.isRequired,
     action: PropTypes.func.isRequired
   };
 
   render() {
     const iconProps = {
-      disabled: this.props.disabled,
+      disabled: !!this.props.disabled,
       name: this.props.icon,
       onClick: !this.props.disabled && bindActionCreators(this.props.action, this.props.dispatch) || () => {},
       style: this.props.disabled ? disabledControlButtonStyles : enabledControlButtonStyles

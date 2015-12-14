@@ -16,12 +16,17 @@ export class Video extends Component {
     window.addEventListener('resize', this._onWindowResize.bind(this));
   }
 
+  componentWillUnmount() {
+    this._resumePlayback();
+    window.removeEventListener('resize', this._onWindowResize);
+  }
+
   render() {
     const videoProps = {
       autoPlay: true,
       height: this.state.height,
       key: this.props.src,
-      onEnded: this._onVideoEnd.bind(this),
+      onEnded: this._resumePlayback.bind(this),
       onPlay: this._onVideoStart.bind(this),
       width: this.state.width
     };
@@ -56,7 +61,7 @@ export class Video extends Component {
     }
   }
 
-  _onVideoEnd() {
+  _resumePlayback() {
     if (this.state.shouldResumePlayback) {
       this.setState({ shouldResumePlayback: false });
       this.props.dispatch(togglePlayback());

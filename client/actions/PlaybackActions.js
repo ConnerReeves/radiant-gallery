@@ -5,12 +5,12 @@ export function setFrequency(frequency) {
   return { type: SET_FREQUENCY, frequency };
 }
 
-export function nextAsset() {
-  return { type: NEXT_ASSET };
+export function nextAsset(maxIndex) {
+  return { type: NEXT_ASSET, maxIndex };
 }
 
-export function previousAsset() {
-  return { type: PREVIOUS_ASSET };
+export function previousAsset(maxIndex) {
+  return { type: PREVIOUS_ASSET, maxIndex };
 }
 
 export function setAssetIndex(index) {

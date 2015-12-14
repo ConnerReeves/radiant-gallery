@@ -22,10 +22,10 @@ export function currentAssetIndex(state = 0, action) {
       return action.index;
 
     case NEXT_ASSET:
-      return state + 1;
+      return state >= action.maxIndex ? 0 : state + 1;
 
     case PREVIOUS_ASSET:
-      return state - 1;
+      return state > 0 ? state - 1 : action.maxIndex;
   }
 
   return state;
