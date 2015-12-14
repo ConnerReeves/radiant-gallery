@@ -1,5 +1,12 @@
-export const CHANGE_FREQUENCY = 'CHANGE_FREQUENCY';
+//Playback Actions
+export const SET_FREQUENCY = 'SET_FREQUENCY';
 export const NEXT_ASSET = 'NEXT_ASSET';
 export const PAUSE = 'PAUSE';
 export const PLAY = 'PLAY';
 export const PREVIOUS_ASSET = 'PREVIOUS_ASSET';
+export const SET_ASSET_INDEX = 'SET_ASSET_INDEX';
+
+//Fetch Actions
+export const FETCH_MANIFEST_FAILED = 'FETCH_MANIFEST_FAILED';
+export const FETCH_MANIFEST_REQUESTED = 'FETCH_MANIFEST_REQUESTED';
+export const FETCH_MANIFEST_SUCCEEDED = 'FETCH_MANIFEST_SUCCEEDED';

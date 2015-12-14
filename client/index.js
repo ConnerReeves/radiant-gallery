@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 
-import App from './components/App';
+import AppContainer from './containers/AppContainer';
 import reducers from './reducers';
 
 require('./app.scss');
@@ -14,6 +14,6 @@ const store =  createThunkStore(reducers);
 
 render((
   <Provider store={ store }>
-    <App />
+    <AppContainer />
   </Provider>
 ), document.getElementById('react-target'));

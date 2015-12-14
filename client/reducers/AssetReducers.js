@@ -1,18 +1,32 @@
-import { NEXT_ASSET, PAUSE, PLAY, PREVIOUS_ASSET } from '../constants/ActionTypes';
+import {
+  FETCH_MANIFEST_SUCCEEDED,
+  NEXT_ASSET,
+  PAUSE,
+  PLAY,
+  PREVIOUS_ASSET,
+  SET_ASSET_INDEX
+} from '../constants/ActionTypes';
 
-const assets = window.assets || [];
-let currentAssetIndex = 0;
-
-export function currentAsset(state = '', action) {
+export function manifest(state = [], action) {
   switch (action.type) {
-    case NEXT_ASSET:
-      currentAssetIndex = currentAssetIndex === assets.length - 1 ? 0 : currentAssetIndex + 1;
-      break;
-
-    case PREVIOUS_ASSET:
-      currentAssetIndex = currentAssetIndex === 0 ? assets.length - 1 : currentAssetIndex - 1;
-      break;
+    case FETCH_MANIFEST_SUCCEEDED:
+      return action.payload.manifest;
   }
 
-  return assets[currentAssetIndex] || state;
+  return state;
+}
+
+export function currentAssetIndex(state = 0, action) {
+  switch (action.type) {
+    case SET_ASSET_INDEX:
+      return action.index;
+
+    case NEXT_ASSET:
+      return state + 1;
+
+    case PREVIOUS_ASSET:
+      return state - 1;
+  }
+
+  return state;
 }

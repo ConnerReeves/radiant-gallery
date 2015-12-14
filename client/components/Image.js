@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 const imgStyles = {
+  left: '50%',
+  maxHeight: '100%',
+  maxWidth: '100%',
   position: 'fixed',
   top: '50%',
-  left: '50%',
-  maxWidth: '100%',
-  maxHeight: '100%',
   transform: 'translate(-50%, -50%)',
   transition: 'opacity 1s ease-in-out'
 };

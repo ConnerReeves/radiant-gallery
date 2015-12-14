@@ -8,7 +8,7 @@ export default class Icon extends Component {
 
   render() {
     const iconProps = Object.assign({}, this.props, {
-      className: `fa fa-${this.props.name}`
+      className: `fa fa-${this.props.name}`,
     });
 
     return (

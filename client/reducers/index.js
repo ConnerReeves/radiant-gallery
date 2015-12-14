@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { currentAsset } from './AssetReducers';
+import { currentAssetIndex, manifest } from './AssetReducers';
 import { frequency, playbackStatus } from './PlaybackReducers';
 
 export default combineReducers({
-  currentAsset,
+  currentAssetIndex,
   frequency,
+  manifest,
   playbackStatus
 });

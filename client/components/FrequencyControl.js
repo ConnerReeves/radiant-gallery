@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { changeFrequency } from '../actions/PlaybackActions';
+import { setFrequency } from '../actions/PlaybackActions';
 import Icon from './Icon';
 
 const containerStyles = {
@@ -36,7 +36,7 @@ class FrequencyControl extends Component {
     };
 
     const selectProps = {
-      onChange: this._changeFrequency.bind(this),
+      onChange: this._setFrequency.bind(this),
       style: selectStyles,
       value: this.props.frequency
     };
@@ -56,8 +56,8 @@ class FrequencyControl extends Component {
     );
   }
 
-  _changeFrequency(event) {
-    const boundAction = bindActionCreators(changeFrequency, this.props.dispatch);
+  _setFrequency(event) {
+    const boundAction = bindActionCreators(setFrequency, this.props.dispatch);
     boundAction(+event.target.value);
   }
 }

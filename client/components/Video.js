@@ -59,7 +59,6 @@ export class Video extends Component {
   _onVideoEnd() {
     if (this.state.shouldResumePlayback) {
       this.setState({ shouldResumePlayback: false });
-      this.props.dispatch(nextAsset());
       this.props.dispatch(togglePlayback());
     }
   }

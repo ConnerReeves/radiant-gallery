@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import AssetController from './AssetController';
-import PlaybackControls from './PlaybackControls';
+import PlaybackControlsContainer from '../containers/PlaybackControlsContainer';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <PlaybackControls />
+        <PlaybackControlsContainer />
         <AssetController />
       </div>
     );

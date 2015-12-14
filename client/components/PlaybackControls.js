@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 
@@ -19,6 +20,12 @@ const leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' })
 const rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
 
 class PlaybackControls extends Component {
+  static propTypes = {
+    disableSkipForward: PropTypes.bool.isRequired,
+    disableSkipBackward: PropTypes.bool.isRequired,
+    hide: PropTypes.bool.isRequired
+  };
+
   state = { focus: false, opacity: 0 };
 
   componentDidMount() {
@@ -30,12 +37,12 @@ class PlaybackControls extends Component {
   }
 
   render() {
-    return (
+    return this.props.hide ? null : (
       <div>
         <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
-          <ControlButton icon="backward" action= { previousAsset } />
-          <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } />
-          <ControlButton icon="forward" action= { nextAsset } />
+          <ControlButton icon="backward" action= { previousAsset } disabled={ this.props.disableSkipBackward } />
+          <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } disabled={ false } />
+          <ControlButton icon="forward" action= { nextAsset } disabled={ this.props.disableSkipForward } />
         </div>
         <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
           <FrequencyControl />
