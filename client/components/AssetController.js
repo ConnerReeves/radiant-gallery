@@ -26,6 +26,7 @@ class AssetController extends Component {
 
   render() {
     if (this.props.currentAsset) {
+      console.log(this.props.currentAsset);
       const assetPath = this.props.currentAsset.path;
       const props = { src: assetPath };
 
