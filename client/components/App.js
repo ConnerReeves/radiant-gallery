@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AssetController from './AssetController';
+import AssetControllerContainer from '../containers/AssetControllerContainer';
 import PlaybackControlsContainer from '../containers/PlaybackControlsContainer';
 
 export default class App extends Component {
@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <PlaybackControlsContainer />
-        <AssetController />
+        <AssetControllerContainer />
       </div>
     );
   }

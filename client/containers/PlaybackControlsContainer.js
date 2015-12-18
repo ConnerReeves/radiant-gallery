@@ -12,13 +12,16 @@ export class PlaybackControlsContainer extends Component {
 }
 
 export const mapStateToProps = (state) => {
-  const { currentAssetIndex, manifest } = state;
+  const { currentAssetIndex, manifest, playbackStatus } = state;
   const currentAsset = manifest[currentAssetIndex];
   const currentAssetPath = currentAsset && currentAsset.path;
 
   return {
+    currentAssetPath: currentAsset && currentAsset.path,
     disableSkipForward: currentAssetIndex >= manifest.length - 1,
-    disableSkipBackward: currentAssetIndex <= 0
+    disableSkipBackward: currentAssetIndex <= 0,
+    maxAssetIndex: manifest.length,
+    playbackStatus
   };
 };
 

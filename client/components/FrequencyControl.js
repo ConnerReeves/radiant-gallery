@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { setFrequency } from '../actions/PlaybackActions';
 import Icon from './Icon';
 
 const containerStyles = {
@@ -28,7 +25,7 @@ const selectStyles = {
   width: '90px'
 };
 
-class FrequencyControl extends Component {
+export default class FrequencyControl extends Component {
   render() {
     const iconProps = {
       name: 'clock-o',
@@ -36,7 +33,7 @@ class FrequencyControl extends Component {
     };
 
     const selectProps = {
-      onChange: this._setFrequency.bind(this),
+      onChange: this.props.onChange,
       style: selectStyles,
       value: this.props.frequency
     };
@@ -55,13 +52,4 @@ class FrequencyControl extends Component {
       </div>
     );
   }
-
-  _setFrequency(event) {
-    const boundAction = bindActionCreators(setFrequency, this.props.dispatch);
-    boundAction(+event.target.value);
-  }
 }
-
-export default connect(state => ({
-  frequency: state.frequency
-}))(FrequencyControl);

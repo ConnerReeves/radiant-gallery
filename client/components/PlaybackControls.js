@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 
-import ControlButton from './ControlButton';
-import FrequencyControl from './FrequencyControl';
+import ControlButtonContainer from '../containers/ControlButtonContainer';
+import FrequencyControlContainer from '../containers/FrequencyControlContainer';
 import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
 import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
 import { isVideo } from '../utils/AppUtils';
@@ -19,7 +19,7 @@ const containerStyles = {
 const leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' });
 const rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
 
-class PlaybackControls extends Component {
+export default class PlaybackControls extends Component {
   state = { focus: false, opacity: 0 };
 
   componentDidMount() {
@@ -40,11 +40,29 @@ class PlaybackControls extends Component {
   }
 
   _getPlaybackControls() {
+    const backButtonProps = {
+      action: () => previousAsset(this.props.maxAssetIndex),
+      disabled: false,
+      icon: 'backward'
+    };
+
+    const playbackToggleButtonProps = {
+      action: () => togglePlayback(),
+      icon: this._getPlaybackToggleIcon(),
+      disabled: isVideo(this.props.currentAssetPath)
+    };
+
+    const forwardButtonProps = {
+      action: () => nextAsset(this.props.maxAssetIndex),
+      disabled: false,
+      icon: 'forward'
+    };
+
     return (
       <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
-        <ControlButton icon="backward" action= { () => previousAsset(this.props.maxAssetIndex) } />
-        <ControlButton icon={ this._getPlaybackToggleIcon() } action={ togglePlayback } disabled={ isVideo(this.props.currentAssetPath) } />
-        <ControlButton icon="forward" action= { () => nextAsset(this.props.maxAssetIndex) } />
+        <ControlButtonContainer { ...backButtonProps } />
+        <ControlButtonContainer { ...playbackToggleButtonProps } />
+        <ControlButtonContainer { ...forwardButtonProps } />
       </div>
     );
   }
@@ -52,7 +70,7 @@ class PlaybackControls extends Component {
   _getFrequencyControls() {
     return isVideo(this.props.currentAssetPath) ? null : (
       <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
-        <FrequencyControl />
+        <FrequencyControlContainer />
       </div>
     );
   }
@@ -78,17 +96,3 @@ class PlaybackControls extends Component {
     });
   }
 }
-
-function mapStateToProps(state) {
-  const { currentAssetIndex, manifest, playbackStatus } = state;
-  const currentAsset = manifest[currentAssetIndex];
-  const currentAssetPath = currentAsset && currentAsset.path;
-
-  return {
-    currentAssetPath,
-    maxAssetIndex: manifest.length - 1,
-    playbackStatus
-  };
-}
-
-export default connect(mapStateToProps)(PlaybackControls);
