@@ -7,7 +7,7 @@ const imgStyles = {
   position: 'fixed',
   top: '50%',
   transform: 'translate(-50%, -50%)',
-  transition: 'opacity 1s ease-in-out'
+  transition: 'opacity 1.5s ease-in-out'
 };
 
 export default class Image extends Component {
@@ -19,14 +19,7 @@ export default class Image extends Component {
 
   componentWillReceiveProps(newProps) {
     if (this.props.src !== newProps.src) {
-      this.setState({
-        opacityToggle: false,
-        staleSrc: this.props.src
-      }, () => {
-        setImmediate(() => {
-          this.setState({ opacityToggle: true });
-        });
-      });
+      this._transitionImages();
     }
   }
 
@@ -40,6 +33,17 @@ export default class Image extends Component {
         { this._getImg(this.state.staleSrc, outroStyle) }
       </div>
     );
+  }
+
+  _transitionImages() {
+    this.setState({
+      opacityToggle: false,
+      staleSrc: this.props.src
+    }, () => {
+      setImmediate(() => {
+        this.setState({ opacityToggle: true });
+      });
+    });
   }
 
   _getImg(src, style) {

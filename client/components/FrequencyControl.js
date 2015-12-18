@@ -3,15 +3,9 @@ import React, { Component } from 'react';
 import Icon from './Icon';
 
 const containerStyles = {
+  display: 'flex',
+  alignItems: 'center',
   opacity: 0.6
-};
-
-const iconStyles = {
-  color: 'white',
-  fontSize: '18px',
-  textShadow: '3px 0 5px #000',
-  verticalAlign: 'middle',
-  WebkitUserSelect: 'none'
 };
 
 const selectStyles = {
@@ -27,11 +21,6 @@ const selectStyles = {
 
 export default class FrequencyControl extends Component {
   render() {
-    const iconProps = {
-      name: 'clock-o',
-      style: iconStyles
-    };
-
     const selectProps = {
       onChange: this.props.onChange,
       style: selectStyles,
@@ -40,7 +29,7 @@ export default class FrequencyControl extends Component {
 
     return (
       <div style={ containerStyles }>
-        <Icon { ...iconProps } />
+        <Icon name="clock-o" />
         <select { ...selectProps }>
           <option value={ 5000 }>5 Seconds</option>
           <option value={ 10000 }>10 Seconds</option>

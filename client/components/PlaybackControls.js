@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 
-import ControlButtonContainer from '../containers/ControlButtonContainer';
+import Icon from './Icon';
 import FrequencyControlContainer from '../containers/FrequencyControlContainer';
 import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
 import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
@@ -40,29 +40,18 @@ export default class PlaybackControls extends Component {
   }
 
   _getPlaybackControls() {
-    const backButtonProps = {
-      action: () => previousAsset(this.props.maxAssetIndex),
-      disabled: false,
-      icon: 'backward'
-    };
-
     const playbackToggleButtonProps = {
-      action: () => togglePlayback(),
-      icon: this._getPlaybackToggleIcon(),
-      disabled: isVideo(this.props.currentAssetPath)
-    };
-
-    const forwardButtonProps = {
-      action: () => nextAsset(this.props.maxAssetIndex),
-      disabled: false,
-      icon: 'forward'
+      disabled: isVideo(this.props.currentAssetPath),
+      name: this._getPlaybackToggleIcon(),
+      onClick: this.props.onTogglePlaybackButtonClick,
+      style: { width: '40px' }
     };
 
     return (
       <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
-        <ControlButtonContainer { ...backButtonProps } />
-        <ControlButtonContainer { ...playbackToggleButtonProps } />
-        <ControlButtonContainer { ...forwardButtonProps } />
+        <Icon name="backward" onClick={ this.props.onBackButtonClick } />
+        <Icon { ...playbackToggleButtonProps } />
+        <Icon name="forward" onClick={ this.props.onForwardButtonClick } />
       </div>
     );
   }
