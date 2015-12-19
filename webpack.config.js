@@ -11,14 +11,15 @@ module.exports = {
 
   module: {
     loaders: [{
-      test: /\.js$/,
+      exclude: /node_modules/,
       loader: 'babel',
       query: {
         stage: 0
-      }
+      },
+      test: /\.js$/
     },{
-      test: /.scss$/,
-      loader: 'style!css!sass?sourceMap'
+      loader: 'style!css!sass?sourceMap',
+      test: /.scss$/
     }]
   }
 }
