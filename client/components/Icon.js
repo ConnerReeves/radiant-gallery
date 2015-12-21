@@ -9,9 +9,10 @@ export default class Icon extends Component {
   };
 
   render() {
-    const iconProps = Object.assign({}, this.props, {
+    const iconProps = {
       className: `fa fa-${this.props.name}`,
-    });
+      onClick: this.props.onClick
+    };
 
     const iconStyle = {
       color: 'white',
