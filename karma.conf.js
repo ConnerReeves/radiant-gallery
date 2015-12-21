@@ -3,8 +3,9 @@ var webpackConfig = require('./webpack.config');
 module.exports = function(config) {
   config.set({
     plugins: [
-      'karma-jasmine',
       'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-jasmine',
       'karma-webpack'
     ],
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -29,7 +30,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['coverage', 'dots'],
 
     // web server port
     port: 9876,
@@ -39,7 +40,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_WARN,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,

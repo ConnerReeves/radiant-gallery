@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import Icon from './Icon';
 
@@ -20,6 +20,11 @@ const selectStyles = {
 };
 
 export default class FrequencyControl extends Component {
+  static propTypes = {
+    frequency: PropTypes.number,
+    onChange: PropTypes.func.isRequired
+  };
+
   render() {
     const selectProps = {
       onChange: this.props.onChange,

@@ -20,6 +20,11 @@ module.exports = {
     },{
       loader: 'style!css!sass?sourceMap',
       test: /.scss$/
+    }],
+    postLoaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'istanbul-instrumenter'
     }]
   }
 }
