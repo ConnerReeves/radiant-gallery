@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import FrequencyControl from '../components/FrequencyControl';
-import { setFrequency } from '../actions/PlaybackActions';
+import FrequencyControl from 'components/FrequencyControl';
+import { setFrequency } from 'actions/PlaybackActions';
 
 const containerStyles = {
   opacity: 0.6

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import { isElementOfType, renderComponent } from '../../utils/TestUtils';
+import { isElementOfType, renderComponent } from 'utils/TestUtils';
 
-import AssetController from '../AssetController';
-import Image from '../Image';
-import VideoContainer from '../../containers/VideoContainer';
-import * as AppUtils from '../../utils/AppUtils';
+import AssetController from 'AssetController';
+import Image from 'Image';
+import VideoContainer from 'containers/VideoContainer';
+import * as AppUtils from 'utils/AppUtils';
 
 describe('components/AssetController', () => {
   it('has the correct propTypes', () => {

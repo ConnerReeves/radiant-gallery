@@ -5,7 +5,7 @@ import {
   FETCH_MANIFEST_FAILED,
   FETCH_MANIFEST_REQUESTED,
   SET_ASSET_INDEX
-} from '../constants/ActionTypes';
+} from 'constants/ActionTypes';
 
 export function fetchManifest() {
   return (dispatch, getState) => {

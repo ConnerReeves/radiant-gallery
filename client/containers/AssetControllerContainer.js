@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import AssetController from '../components/AssetController';
-import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
-import { nextAsset, setAssetIndex } from '../actions/PlaybackActions';
+import AssetController from 'components/AssetController';
+import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
+import { nextAsset, setAssetIndex } from 'actions/PlaybackActions';
 
 class AssetControllerContainer extends Component {
   playbackTimeout;

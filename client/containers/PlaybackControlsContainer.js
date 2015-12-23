@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PlaybackControls from '../components/PlaybackControls';
-import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
+import PlaybackControls from 'components/PlaybackControls';
+import { nextAsset, togglePlayback, previousAsset } from 'actions/PlaybackActions';
 
 export class PlaybackControlsContainer extends Component {
   render() {

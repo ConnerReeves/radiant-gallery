@@ -4,10 +4,10 @@ import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 
 import Icon from './Icon';
-import FrequencyControlContainer from '../containers/FrequencyControlContainer';
-import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
-import { nextAsset, togglePlayback, previousAsset } from '../actions/PlaybackActions';
-import { isVideo } from '../utils/AppUtils';
+import FrequencyControlContainer from 'containers/FrequencyControlContainer';
+import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
+import { nextAsset, togglePlayback, previousAsset } from 'actions/PlaybackActions';
+import { isVideo } from 'utils/AppUtils';
 
 const containerStyles = {
   position: 'fixed',

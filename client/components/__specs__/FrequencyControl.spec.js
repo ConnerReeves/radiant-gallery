@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { isElementOfType, renderComponent } from '../../utils/TestUtils';
+import { isElementOfType, renderComponent } from 'utils/TestUtils';
 
-import FrequencyControl from '../FrequencyControl';
-import Icon from '../Icon';
+import FrequencyControl from 'FrequencyControl';
+import Icon from 'Icon';
 
 describe('components/FrequencyControl', () => {
   it('has the correct propTypes', () => {

@@ -5,7 +5,7 @@ import {
   PLAY,
   PREVIOUS_ASSET,
   SET_ASSET_INDEX
-} from '../constants/ActionTypes';
+} from 'constants/ActionTypes';
 
 export function manifest(state = [], action) {
   switch (action.type) {

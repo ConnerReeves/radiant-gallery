@@ -1,8 +1,8 @@
-import { isElementOfType, renderComponent } from '../../utils/TestUtils';
+import { isElementOfType, renderComponent } from 'utils/TestUtils';
 
-import App from '../App';
-import AssetControllerContainer from '../../containers/AssetControllerContainer';
-import PlaybackControlsContainer from '../../containers/PlaybackControlsContainer';
+import App from 'App';
+import AssetControllerContainer from 'containers/AssetControllerContainer';
+import PlaybackControlsContainer from 'containers/PlaybackControlsContainer';
 
 describe('components/App', () => {
   describe('#render', () => {

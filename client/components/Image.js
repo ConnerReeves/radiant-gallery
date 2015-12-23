@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const imgStyles = {
   left: '50%',
@@ -12,7 +12,7 @@ const imgStyles = {
 
 export default class Image extends Component {
   static propTypes = {
-    src: React.PropTypes.string.isRequired
+    src: PropTypes.string.isRequired
   };
 
   state = { opacityToggle: true };
@@ -24,8 +24,8 @@ export default class Image extends Component {
   }
 
   render() {
-    const introStyle = Object.assign({}, imgStyles, { opacity: this.state.opacityToggle ? 1 : 0 });
-    const outroStyle = Object.assign({}, imgStyles, { opacity: this.state.opacityToggle ? 0 : 1 });
+    const introStyle = { opacity: this.state.opacityToggle ? 1 : 0, ...imgStyles };
+    const outroStyle = { opacity: this.state.opacityToggle ? 0 : 1, ...imgStyles };
 
     return (
       <div>

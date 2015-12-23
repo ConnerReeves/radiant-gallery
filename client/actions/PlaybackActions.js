@@ -1,5 +1,5 @@
-import { SET_FREQUENCY, NEXT_ASSET, PAUSE, PLAY, PREVIOUS_ASSET, SET_ASSET_INDEX } from '../constants/ActionTypes';
-import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
+import { SET_FREQUENCY, NEXT_ASSET, PAUSE, PLAY, PREVIOUS_ASSET, SET_ASSET_INDEX } from 'constants/ActionTypes';
+import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
 
 export function setFrequency(frequency) {
   return { type: SET_FREQUENCY, frequency };

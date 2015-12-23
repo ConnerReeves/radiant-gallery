@@ -1,5 +1,5 @@
-import { SET_FREQUENCY, PAUSE, PLAY } from '../constants/ActionTypes';
-import { PAUSED, PLAYING } from '../constants/PlaybackStatuses';
+import { SET_FREQUENCY, PAUSE, PLAY } from 'constants/ActionTypes';
+import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
 
 export function playbackStatus(state = PAUSED, action) {
   switch (action.type) {

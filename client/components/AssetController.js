@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import { getAssetType } from '../utils/AppUtils';
+import { getAssetType } from 'utils/AppUtils';
 import Image from './Image';
-import VideoContainer from '../containers/VideoContainer';
+import VideoContainer from 'containers/VideoContainer';
 
 export default class AssetController extends Component {
   static propTypes = {

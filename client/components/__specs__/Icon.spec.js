@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { isElementOfType, renderComponent } from '../../utils/TestUtils';
+import { isElementOfType, renderComponent } from 'utils/TestUtils';
 
-import Icon from '../Icon';
+import Icon from 'Icon';
 
 const mockIconName = 'gear';
 const mockOnClick = () => {};

@@ -6,9 +6,7 @@ module.exports = {
     path: __dirname + "/dist",
     filename: "bundle.js"
   },
-
   devtool: '#source-map',
-
   module: {
     loaders: [{
       exclude: /node_modules/,
@@ -26,5 +24,8 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'istanbul-instrumenter'
     }]
+  },
+  resolve: {
+    modulesDirectories: ['.', 'node_modules'],
   }
 }

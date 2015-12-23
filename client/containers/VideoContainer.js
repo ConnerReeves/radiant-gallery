@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Video from '../components/Video';
-import { togglePlayback } from '../actions/PlaybackActions';
-import { PLAYING } from '../constants/PlaybackStatuses';
+import Video from 'components/Video';
+import { togglePlayback } from 'actions/PlaybackActions';
+import { PLAYING } from 'constants/PlaybackStatuses';
 
 export class VideoContainer extends Component {
   static propTypes = {
