@@ -1,0 +1,19 @@
+{
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "node": true
+  },
+  "extends": 'eslint:recommended',
+  "parser": 'babel-eslint',
+  "plugins": ['react'],
+  "rules": {
+    "indent": [2, 2, { SwitchCase: 1 }],
+    "react/jsx-uses-vars": 1,
+    "react/jsx-uses-react": 1,
+    "semi": 1
+  }
+}

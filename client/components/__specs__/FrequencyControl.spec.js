@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import { isElementOfType, renderComponent } from 'utils/TestUtils';
 
 import FrequencyControl from 'FrequencyControl';

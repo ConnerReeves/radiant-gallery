@@ -29,6 +29,6 @@ export function togglePlayback() {
       case PAUSED:
         dispatch({ type: PLAY });
         break;
-      }
+    }
   };
 }

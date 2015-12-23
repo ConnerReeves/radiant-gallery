@@ -1,12 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { connect } from 'react-redux';
 
 import Icon from './Icon';
 import FrequencyControlContainer from 'containers/FrequencyControlContainer';
-import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
-import { nextAsset, togglePlayback, previousAsset } from 'actions/PlaybackActions';
+import { PLAYING } from 'constants/PlaybackStatuses';
 import { isVideo } from 'utils/AppUtils';
 
 const containerStyles = {

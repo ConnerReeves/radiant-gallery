@@ -1,8 +1,6 @@
 import {
   FETCH_MANIFEST_SUCCEEDED,
   NEXT_ASSET,
-  PAUSE,
-  PLAY,
   PREVIOUS_ASSET,
   SET_ASSET_INDEX
 } from 'constants/ActionTypes';

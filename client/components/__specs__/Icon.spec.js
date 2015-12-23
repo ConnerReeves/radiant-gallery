@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { isElementOfType, renderComponent } from 'utils/TestUtils';
+import { PropTypes } from 'react';
+import { renderComponent } from 'utils/TestUtils';
 
 import Icon from 'Icon';
 

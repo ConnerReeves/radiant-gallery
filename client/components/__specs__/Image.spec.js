@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import { renderComponent, rerenderComponent } from 'utils/TestUtils';
 
 import Image from 'Image';

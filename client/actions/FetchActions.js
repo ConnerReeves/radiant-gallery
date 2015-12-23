@@ -8,7 +8,7 @@ import {
 } from 'constants/ActionTypes';
 
 export function fetchManifest() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({ type: FETCH_MANIFEST_REQUESTED });
     request.get('/manifest')
       .end((err, res) => {

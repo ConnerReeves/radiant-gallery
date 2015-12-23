@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && webpack && node bin/www",
-    "test": "./node_modules/karma/bin/karma start",
-    "dev": "webpack --watch & nodemon bin/www"
+    "dev": "webpack --watch & nodemon bin/www",
+    "lint": "eslint .",
+    "start": "webpack && node bin/www",
+    "test": "npm run lint && npm run test:single",
+    "test:dev": "./node_modules/karma/bin/karma start",
+    "test:single": "./node_modules/karma/bin/karma start --single-run"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +35,7 @@
     "babel-loader": "^5.3.1",
     "body-parser": "^1.13.2",
     "css-loader": "^0.15.1",
+    "eslint-plugin-react": "^3.12.0",
     "istanbul-instrumenter-loader": "^0.1.3",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.15",
