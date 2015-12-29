@@ -14,7 +14,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-const assetDir = process.argv[process.argv.length - 1];
+const assetDir = process.argv[2];
+
+if (!assetDir) {
+  throw new Error('Asset directory not specified');
+}
+
 app.use(express.static('dist'));
 app.use(express.static(assetDir));
 
