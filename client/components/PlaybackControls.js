@@ -6,15 +6,9 @@ import FrequencyControlContainer from 'containers/FrequencyControlContainer';
 import { PLAYING } from 'constants/PlaybackStatuses';
 import { isVideo } from 'utils/AppUtils';
 
-const containerStyles = {
-  position: 'fixed',
-  transition: 'opacity 0.5s ease-in-out',
-  top: '10px',
-  zIndex: 1
-};
-
-const leftContainerSytles = Object.assign({}, containerStyles, { left: '10px' });
-const rightContainerSytles = Object.assign({}, containerStyles, { right: '10px' });
+const containerStyles = { transition: 'opacity 0.5s ease-in-out', zIndex: 1 };
+const leftStyles = { top: '10px', left: '10px', position: 'fixed' };
+const rightStyles = { top: '10px', right: '10px', position: 'fixed' };
 
 export default class PlaybackControls extends Component {
   state = { focus: false, opacity: 0 };
@@ -29,7 +23,7 @@ export default class PlaybackControls extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ opacity: this.state.opacity, ...containerStyles }}>
         { this._getPlaybackControls() }
         { this._getFrequencyControls() }
       </div>
@@ -45,7 +39,7 @@ export default class PlaybackControls extends Component {
     };
 
     return (
-      <div style={ Object.assign({}, leftContainerSytles, { opacity: this.state.opacity }) }>
+      <div style={ leftStyles }>
         <Icon name="backward" onClick={ this.props.onBackButtonClick } />
         <Icon { ...playbackToggleButtonProps } />
         <Icon name="forward" onClick={ this.props.onForwardButtonClick } />
@@ -55,7 +49,7 @@ export default class PlaybackControls extends Component {
 
   _getFrequencyControls() {
     return isVideo(this.props.currentAssetPath) ? null : (
-      <div style={ Object.assign({}, rightContainerSytles, { opacity: this.state.opacity }) }>
+      <div style={ rightStyles }>
         <FrequencyControlContainer />
       </div>
     );
