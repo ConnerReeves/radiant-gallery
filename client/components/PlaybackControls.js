@@ -6,9 +6,9 @@ import FrequencyControlContainer from 'containers/FrequencyControlContainer';
 import { PLAYING } from 'constants/PlaybackStatuses';
 import { isVideo } from 'utils/AppUtils';
 
-const containerStyles = { transition: 'opacity 0.5s ease-in-out', zIndex: 1 };
-const leftStyles = { top: '10px', left: '10px', position: 'fixed' };
-const rightStyles = { top: '10px', right: '10px', position: 'fixed' };
+const containerStyles = { transition: 'opacity 0.5s ease-in-out' };
+const leftStyles = { top: '10px', left: '10px', position: 'fixed', zIndex: 1 };
+const rightStyles = { top: '10px', right: '10px', position: 'fixed', zIndex: 1 };
 
 export default class PlaybackControls extends Component {
   state = { focus: false, opacity: 0 };

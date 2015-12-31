@@ -37,8 +37,6 @@ export const mapStateToProps = (state) => {
 
   return {
     currentAssetPath: currentAsset && currentAsset.path,
-    disableSkipForward: currentAssetIndex >= manifest.length - 1,
-    disableSkipBackward: currentAssetIndex <= 0,
     maxAssetIndex: manifest.length - 1,
     playbackStatus
   };
