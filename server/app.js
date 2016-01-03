@@ -31,7 +31,8 @@ const getLocationName = (latitude, longitude) => new Promise((resolve) => {
       if (!err) {
         const locations = res.body.results;
         const city = locations[locations.length - (locations.length > 1 ? 2 : 1)];
-        resolve(city.formatted_address);
+        const address = city && city.formatted_address || '';
+        resolve(address);
       }
     });
 });
