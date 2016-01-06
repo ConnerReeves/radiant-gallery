@@ -2,13 +2,6 @@
 ###### Multimedia slideshow server
 ---
 
-
-#### Currently supported file formats
-- Image
-  - JPG
-- Video
-  - MP4
-
 #### Installation
 1. Install [Node.js](http://nodejs.org)
 2. Clone this repository or download the zip
