@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Video from 'components/Video';
-import { togglePlayback } from 'actions/PlaybackActions';
+import { nextAsset, togglePlayback } from 'actions/PlaybackActions';
 import { PLAYING } from 'constants/PlaybackStatuses';
 
 export class VideoContainer extends Component {
@@ -61,6 +61,7 @@ export class VideoContainer extends Component {
   _resumePlayback() {
     if (this.state.shouldResumePlayback) {
       this.setState({ shouldResumePlayback: false });
+      this.props.dispatch(nextAsset());
       this.props.dispatch(togglePlayback());
     }
   }

@@ -1,0 +1,17 @@
+.asset-enter {
+  opacity: 0.01;
+}
+
+.asset-enter.asset-enter-active {
+  opacity: 1;
+  transition: opacity 1.5s ease-in;
+}
+
+.asset-leave {
+  opacity: 1;
+}
+
+.asset-leave.asset-leave-active {
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}

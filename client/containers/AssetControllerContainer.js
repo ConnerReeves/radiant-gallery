@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import AssetController from 'components/AssetController';
 import { PLAYING } from 'constants/PlaybackStatuses';
-import { nextAsset, setAssetIndex } from 'actions/PlaybackActions';
+import { setAssetIndex } from 'actions/PlaybackActions';
+
+let playbackTimeout;
 
 class AssetControllerContainer extends Component {
-  playbackTimeout;
-
   componentWillReceiveProps(nextProps) {
     const playbackStatusChanged = this.props.playbackStatus !== nextProps.playbackStatus;
     const frequencyChanged = this.props.frequency !== nextProps.frequency;
@@ -16,7 +16,6 @@ class AssetControllerContainer extends Component {
       this._stopPlayback();
 
       if (nextProps.playbackStatus === PLAYING || frequencyChanged) {
-        this.props.dispatch(nextAsset(this.props.maxAssetIndex));
         this._startPlayback(nextProps.frequency);
       }
     }
@@ -24,21 +23,18 @@ class AssetControllerContainer extends Component {
 
   render() {
     const props = { currentAsset: this.props.currentAsset };
-
-    return (
-      <AssetController { ...props } />
-    );
+    return <AssetController { ...props } />;
   }
 
   _startPlayback(frequency) {
-    this.playbackTimeout = setTimeout(() => {
+    playbackTimeout = setTimeout(() => {
       this._changeAsset();
       this._startPlayback(frequency);
     }, frequency);
   }
 
   _stopPlayback() {
-    clearTimeout(this.playbackTimeout);
+    clearTimeout(playbackTimeout);
   }
 
   _changeAsset() {
