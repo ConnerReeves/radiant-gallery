@@ -25,7 +25,5 @@ describe('components/PlaybackControls', () => {
     expect(renderedPlaybackControls.props.style.transition).toBe('opacity 0.5s ease-in-out');
   });
 
-  it('has the correct zIndex', () => {
-    expect(renderedPlaybackControls.props.style.zIndex).toBe(1);
-  });
+  //TODO: Finish specs...
 });
