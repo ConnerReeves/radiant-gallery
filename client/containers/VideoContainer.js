@@ -10,24 +10,19 @@ export class VideoContainer extends Component {
     src: React.PropTypes.string.isRequired
   };
 
-  state = Object.assign(this._getPlayerSize(), { shouldResumePlayback: false })
-
-  componentDidMount() {
-    window.addEventListener('resize', this._onWindowResize.bind(this));
-  }
+  state = { shouldResumePlayback: false };
 
   componentWillUnmount() {
     this._resumePlayback();
-    window.removeEventListener('resize', this._onWindowResize);
   }
 
   render() {
     const props = {
-      height: this.state.height,
+      height: this.props.viewportSize.height,
       src: this.props.src,
       onEnded: this._resumePlayback.bind(this),
       onPlay: this._onVideoStart.bind(this),
-      width: this.state.width
+      width: this.props.viewportSize.width
     };
 
     return (
@@ -38,17 +33,6 @@ export class VideoContainer extends Component {
   _getVideoType() {
     const pathParts = this.props.src.split('.');
     return `video/${ pathParts[pathParts.length - 1] }`;
-  }
-
-  _getPlayerSize() {
-    return {
-      height: window.innerHeight,
-      width: window.innerWidth
-    };
-  }
-
-  _onWindowResize() {
-    this.setState(this._getPlayerSize());
   }
 
   _onVideoStart() {
@@ -67,5 +51,9 @@ export class VideoContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ playbackStatus: state.playbackStatus });
+const mapStateToProps = (state) => ({
+  playbackStatus: state.playbackStatus,
+  viewportSize: state.viewportSize
+});
+
 export default connect(mapStateToProps)(VideoContainer);

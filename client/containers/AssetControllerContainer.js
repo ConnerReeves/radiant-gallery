@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 
 import AssetController from 'components/AssetController';
 import { PLAYING } from 'constants/PlaybackStatuses';
-import { setAssetIndex } from 'actions/PlaybackActions';
+import { setAssetIndex, setViewportSize } from 'actions/PlaybackActions';
 
 let playbackTimeout;
 
 class AssetControllerContainer extends Component {
+  componentDidMount() {
+    window.addEventListener('resize', this._onWindowResize.bind(this));
+  }
+
   componentWillReceiveProps(nextProps) {
     const playbackStatusChanged = this.props.playbackStatus !== nextProps.playbackStatus;
     const frequencyChanged = this.props.frequency !== nextProps.frequency;
@@ -41,6 +45,13 @@ class AssetControllerContainer extends Component {
     const { currentAssetIndex, manifest } = this.props;
     const newAssetIndex = currentAssetIndex >= manifest.length - 1 ? 0 : currentAssetIndex + 1;
     this.props.dispatch(setAssetIndex(newAssetIndex));
+  }
+
+  _onWindowResize() {
+    this.props.dispatch(setViewportSize({
+      height: window.innerHeight,
+      width: window.innerWidth
+    }));
   }
 }
 

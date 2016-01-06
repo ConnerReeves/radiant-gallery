@@ -1,5 +1,13 @@
-import { SET_FREQUENCY, NEXT_ASSET, PAUSE, PLAY, PREVIOUS_ASSET, SET_ASSET_INDEX } from 'constants/ActionTypes';
 import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
+import {
+  NEXT_ASSET,
+  PAUSE,
+  PLAY,
+  PREVIOUS_ASSET,
+  SET_ASSET_INDEX,
+  SET_FREQUENCY,
+  SET_VIEWPORT_SIZE
+} from 'constants/ActionTypes';
 
 export function setFrequency(frequency) {
   return { type: SET_FREQUENCY, frequency };
@@ -15,6 +23,10 @@ export function previousAsset(maxIndex) {
 
 export function setAssetIndex(index) {
   return { type: SET_ASSET_INDEX, index };
+}
+
+export function setViewportSize({ height, width }) {
+  return { type: SET_VIEWPORT_SIZE, height, width };
 }
 
 export function togglePlayback() {
