@@ -11,6 +11,7 @@ class FrequencyControlContainer extends Component {
 
   render() {
     const props = {
+      frequency: this.props.frequency,
       onChange: this._onFrequencyChange.bind(this)
     };
 
