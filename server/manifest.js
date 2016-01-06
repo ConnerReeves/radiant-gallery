@@ -7,7 +7,7 @@ const isImage = (file) => ['GIF', 'JPG', 'PNG', 'TIFF'].indexOf(getPath(file)) !
 const isVideo = (file) => ['MP4', 'OGG', 'WEBM'].indexOf(getPath(file)) !== -1;
 
 module.exports = {
-  getManifest: (dir) => new Promise((resolve, reject) => {
+  getManifest: (dir) => new Promise((resolve) => {
     readDir(dir, (err, files) => {
       const filteredFiles = _(files)
         .filter((file) => isImage(file) || isVideo(file))

@@ -17,7 +17,7 @@ app.use(express.static(mediaDir));
 
 app.get('/manifest', (req, res) => {
   const path = req.query.path || mediaDir;
-  manifest.getManifest(mediaDir).then((manifest) => res.send(manifest));
+  manifest.getManifest(path).then((manifest) => res.send(manifest));
 });
 
 app.get('/', (req, res) => {
