@@ -1,7 +1,9 @@
+.asset-appear,
 .asset-enter {
-  opacity: 0.01;
+  opacity: 0;
 }
 
+.asset-appear.asset-appear-active,
 .asset-enter.asset-enter-active {
   opacity: 1;
   transition: opacity 1.5s ease-in;
