@@ -27,7 +27,7 @@ export default class AssetController extends Component {
         component: 'div',
         transitionEnterTimeout: 2000,
         transitionLeaveTimeout: 2000,
-        transitionName: 'asset',
+        transitionName: 'asset'
       };
 
       return (
