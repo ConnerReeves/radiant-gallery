@@ -11,7 +11,7 @@ module.exports = {
     readDir(dir, (err, files) => {
       const filteredFiles = _(files)
         .filter((file) => isImage(file) || isVideo(file))
-        .map((file) => ({ path: file }))
+        .map((file) => ({ path: file.replace(dir, '') }))
         .value();
 
       resolve(filteredFiles);
