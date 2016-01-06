@@ -13,12 +13,12 @@ export class VideoContainer extends Component {
   state = Object.assign(this._getPlayerSize(), { shouldResumePlayback: false })
 
   componentDidMount() {
-    document.addEventListener('resize', this._onWindowResize.bind(this));
+    window.addEventListener('resize', this._onWindowResize.bind(this));
   }
 
   componentWillUnmount() {
     this._resumePlayback();
-    document.removeEventListener('resize', this._onWindowResize);
+    window.removeEventListener('resize', this._onWindowResize);
   }
 
   render() {
