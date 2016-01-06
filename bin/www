@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-var http = require('../server/app');
-var port = process.env.PORT || 3000;
+const http = require('../server/app');
+const port = process.env.PORT || 3000;
+
 http.listen(port, function(){
-  console.log('\nSuccess: http://localhost:' + port);
+  console.log('Server started successfully: http://localhost:' + port);
 });
