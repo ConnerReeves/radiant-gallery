@@ -6,12 +6,29 @@ $light-blue: #3498db;
   letter-spacing: 2px;
   padding: 10px;
 
+
+  .fade-mask {
+    background: linear-gradient(to bottom, rgba(17, 17, 17, 0), rgba(17, 17, 17, 1) 90%);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .current-path,
+  .path-options {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   .current-path {
-    margin-right: 2px;
+    direction: rtl;
   }
 
   .path-options {
-    flex: 1;
+    height: 100%;
+    min-width: 242px;
 
     .active {
       color: $light-blue;

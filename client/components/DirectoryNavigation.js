@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-
-const HEAVY_ASTERISK = '✱';
+import ReactDOM from 'react-dom';
 
 require('styles/directory-navigation.scss');
 
 export default class DirectoryNavigation extends Component {
+  static previousPathOptionsScrollPosition = 0;
+
   static propTypes = {
     currentPath: PropTypes.string,
     currentPathChildren: PropTypes.array,
@@ -15,24 +16,32 @@ export default class DirectoryNavigation extends Component {
   render() {
     return (
       <div className="directory-navigation">
-        <div className="current-path">{ `${this.props.currentPath}/` }</div>
+        <div className="current-path">
+          { this._getCurrentPath() }
+        </div>
         <div className="path-options">
-          { this._getAsterisk() }
           { this._getPathChildren() }
         </div>
+        <div className="fade-mask" />
       </div>
     );
   }
 
-  _getAsterisk() {
-    const className = this.props.selectedChildPathIndex === null ? 'active' : '';
-    return <div className={ className }>{ HEAVY_ASTERISK }</div>;
+  _getCurrentPath() {
+    const pathParts = this.props.currentPath && this.props.currentPath.split('/') || [];
+    return pathParts.map((part) => this._truncateText(part)).join('/');
   }
 
   _getPathChildren() {
-    return this.props.currentPathChildren.map((child, index) => {
+    const pathChildren = this.props.currentPathChildren.map((child, index) => {
       const className = this.props.selectedChildPathIndex === index ? 'active' : '';
-      return <div key={ child } className={ className }>{ child }</div>;
+      return <div key={ child } className={ className }>{ this._truncateText(child) }</div>;
     });
+
+    return pathChildren.slice(this.props.selectedChildPathIndex, pathChildren.length).concat(pathChildren.slice(0, this.props.selectedChildPathIndex));
+  }
+
+  _truncateText(text) {
+    return text.length > 20 ? `${text.substring(0, 19)}...` : text;
   }
 }

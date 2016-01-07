@@ -1,6 +1,8 @@
 //Keyboard Actions
 export const DOWN_KEY_PRESSED = 'DOWN_KEY_PRESSED';
+export const LEFT_KEY_PRESSED = 'LEFT_KEY_PRESSED';
 export const ENTER_KEY_PRESSED = 'ENTER_KEY_PRESSED';
+export const RIGHT_KEY_PRESSED = 'RIGHT_KEY_PRESSED';
 export const UNUSED_KEY_PRESSED = 'UNUSED_KEY_PRESSED';
 export const UP_KEY_PRESSED = 'UP_KEY_PRESSED';
 

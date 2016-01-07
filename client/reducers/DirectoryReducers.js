@@ -1,64 +1,82 @@
 import {
   DOWN_KEY_PRESSED,
+  ENTER_KEY_PRESSED,
   FETCH_DIRECTORY_SUCCEEDED,
-  UP_KEY_PRESSED,
-  ENTER_KEY_PRESSED
+  LEFT_KEY_PRESSED,
+  RIGHT_KEY_PRESSED,
+  UP_KEY_PRESSED
 } from 'constants/ActionTypes';
 
 const initialState = {
+  basePath: null,
   currentPath: null,
   currentPathChildren: [],
-  selectedChildPathIndex: null
+  pendingSelectedChild: null,
+  selectedChildPathIndex: 0
+};
+
+const getPreviousSubdirectoryIndex = ({ currentIndex, childCount }) => {
+  return childCount ? (currentIndex === 0 ? childCount - 1 : currentIndex - 1) : currentIndex;
+};
+
+const getNextSubdirectoryIndex = ({ currentIndex, childCount }) => {
+  return childCount ? (currentIndex === childCount - 1 ? 0 : currentIndex + 1) : currentIndex;
 };
 
 export function directory(state = initialState, action) {
+  let newPath;
+
   switch (action.type) {
     case FETCH_DIRECTORY_SUCCEEDED:
+      const newSelectedChildIndex = action.children.indexOf(state.pendingSelectedChild);
+
       return Object.assign({}, state, {
+        basePath: state.basePath || action.path,
         currentPath: action.path,
-        currentPathChildren: action.children
+        currentPathChildren: action.children,
+        selectedChildPathIndex: newSelectedChildIndex !== -1 ? newSelectedChildIndex : 0
       });
 
     case DOWN_KEY_PRESSED:
-      if (state.currentPathChildren.length) {
-        if (state.selectedChildPathIndex === null) {
-          return Object.assign({}, state, { selectedChildPathIndex: 0 });
-        }
-
-        if (state.selectedChildPathIndex === state.currentPathChildren.length - 1) {
-          return Object.assign({}, state, { selectedChildPathIndex: null });
-        }
-
-        return Object.assign({}, state, { selectedChildPathIndex: state.selectedChildPathIndex + 1 });
-      }
-
-      break;
+      return Object.assign({}, state, { selectedChildPathIndex : getNextSubdirectoryIndex({
+        currentIndex: state.selectedChildPathIndex,
+        childCount: state.currentPathChildren.length
+      })});
 
     case UP_KEY_PRESSED:
-      if (state.currentPathChildren.length) {
-        if (state.selectedChildPathIndex === null) {
-          return Object.assign({}, state, { selectedChildPathIndex: state.currentPathChildren.length - 1 });
-        }
+      return Object.assign({}, state, { selectedChildPathIndex : getPreviousSubdirectoryIndex({
+        currentIndex: state.selectedChildPathIndex,
+        childCount: state.currentPathChildren.length
+      })});
 
-        if (state.selectedChildPathIndex === 0) {
-          return Object.assign({}, state, { selectedChildPathIndex: null });
-        }
+    case ENTER_KEY_PRESSED:
+    case RIGHT_KEY_PRESSED:
+      newPath = state.currentPathChildren[state.selectedChildPathIndex];
 
-        return Object.assign({}, state, { selectedChildPathIndex: state.selectedChildPathIndex - 1 });
+      if (newPath) {
+        return Object.assign({}, state, {
+          currentPath: `${state.currentPath}/${newPath}`,
+          currentPathChildren: [],
+          selectedChildPathIndex: 0
+        });
       }
 
       break;
 
-    case ENTER_KEY_PRESSED:
-      if (state.selectedChildPathIndex !== null) {
+    case LEFT_KEY_PRESSED:
+      const pathParts = state.currentPath.split('/');
+      newPath = pathParts.slice(0, pathParts.length - 1).join('/');
+
+      if (newPath.length >= state.basePath.length) {
         return Object.assign({}, state, {
-          currentPath: `${state.currentPath}/${state.currentPathChildren[state.selectedChildPathIndex]}`,
+          currentPath: newPath,
           currentPathChildren: [],
-          selectedChildPathIndex: null
+          selectedChildPathIndex: 0,
+          pendingSelectedChild: pathParts[pathParts.length - 1]
         });
-      } else {
-        console.log(`Confirm selection for ${state.currentPath}`);
       }
+
+      break;
   }
 
   return state;
