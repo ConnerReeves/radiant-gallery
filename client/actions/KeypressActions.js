@@ -1,5 +1,6 @@
 import {
   ENTER_KEY_PRESSED,
+  ESC_KEY_PRESSED,
   LEFT_KEY_PRESSED,
   DOWN_KEY_PRESSED,
   RIGHT_KEY_PRESSED,
@@ -11,6 +12,9 @@ export function onKeyPress(keyCode) {
   switch (keyCode) {
     case 13:
       return { type: ENTER_KEY_PRESSED };
+
+    case 27:
+      return { type: ESC_KEY_PRESSED };
 
     case 37:
       return { type: LEFT_KEY_PRESSED };

@@ -12,13 +12,13 @@ export class AppContainer extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (!this.props.finalPathChosen) {
+    if (!this.props.directory.finalPath) {
       if (this.props.directory.currentPath !== newProps.directory.currentPath) {
         this.props.dispatch(fetchDirectory(newProps.directory.currentPath));
       }
 
-      if (newProps.finalPathChosen) {
-        this.props.dispatch(fetchManifest(newProps.directory.currentPath));
+      if (newProps.directory.finalPath) {
+        this.props.dispatch(fetchManifest(newProps.directory.finalPath));
       }
     }
   }
@@ -28,9 +28,7 @@ export class AppContainer extends Component {
   }
 
   render() {
-    const props = {
-      finalPathChosen: this.props.finalPathChosen
-    };
+    const props = { finalPathChosen: this.props.directory.finalPath };
 
     return (
       <App { ...props } />
@@ -42,11 +40,6 @@ export class AppContainer extends Component {
   }
 }
 
-export const mapStateToProps = (state) => {
-  return {
-    finalPathChosen: false,
-    directory: state.directory
-  };
-};
+export const mapStateToProps = (state) => ({ directory: state.directory });
 
 export default connect(mapStateToProps)(AppContainer);

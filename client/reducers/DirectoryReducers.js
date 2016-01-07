@@ -1,16 +1,19 @@
 import {
   DOWN_KEY_PRESSED,
   ENTER_KEY_PRESSED,
+  ESC_KEY_PRESSED,
   FETCH_DIRECTORY_SUCCEEDED,
   LEFT_KEY_PRESSED,
   RIGHT_KEY_PRESSED,
-  UP_KEY_PRESSED
+  UP_KEY_PRESSED,
+  START_SLIDESHOW
 } from 'constants/ActionTypes';
 
 const initialState = {
   basePath: null,
   currentPath: null,
   currentPathChildren: [],
+  finalPath: null,
   pendingSelectedChild: null,
   selectedChildPathIndex: 0
 };
@@ -49,7 +52,6 @@ export function directory(state = initialState, action) {
         childCount: state.currentPathChildren.length
       })});
 
-    case ENTER_KEY_PRESSED:
     case RIGHT_KEY_PRESSED:
       newPath = state.currentPathChildren[state.selectedChildPathIndex];
 
@@ -77,6 +79,14 @@ export function directory(state = initialState, action) {
       }
 
       break;
+
+    case ENTER_KEY_PRESSED:
+      const selectedFinalPath = state.currentPathChildren[state.selectedChildPathIndex];
+      const finalPath = `${state.currentPath}/${selectedFinalPath || ''}`;
+      return Object.assign({}, state, { finalPath });
+
+    case ESC_KEY_PRESSED:
+      return Object.assign({}, state, { finalPath: null });
   }
 
   return state;

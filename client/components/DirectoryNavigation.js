@@ -17,7 +17,7 @@ export default class DirectoryNavigation extends Component {
     return (
       <div className="directory-navigation">
         <div className="current-path">
-          { this._getCurrentPath() }
+          { this.props.currentPath }
         </div>
         <div className="path-options">
           { this._getPathChildren() }
@@ -25,11 +25,6 @@ export default class DirectoryNavigation extends Component {
         <div className="fade-mask" />
       </div>
     );
-  }
-
-  _getCurrentPath() {
-    const pathParts = this.props.currentPath && this.props.currentPath.split('/') || [];
-    return pathParts.map((part) => this._truncateText(part)).join('/');
   }
 
   _getPathChildren() {
