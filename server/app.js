@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const banner = require('./banner');
+const directory = require('./directory');
 const manifest = require('./manifest');
 
 banner.display();
@@ -14,6 +15,13 @@ if (!mediaDir) {
 
 app.use(express.static('dist'));
 app.use(express.static(mediaDir));
+
+app.get('/directory', (req, res) => {
+  const path = req.query.path || mediaDir;
+  directory.getSubDirs(path).then((children) => {
+    res.send({ path, children });
+  });
+});
 
 app.get('/manifest', (req, res) => {
   const path = req.query.path || mediaDir;
