@@ -8,7 +8,7 @@ import {
 export function manifest(state = [], action) {
   switch (action.type) {
     case FETCH_MANIFEST_SUCCEEDED:
-      return action.payload.manifest;
+      return action.manifest;
   }
 
   return state;

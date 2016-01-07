@@ -7,8 +7,6 @@ import thunk from 'redux-thunk';
 import AppContainer from './containers/AppContainer';
 import reducers from './reducers';
 
-require('./app.scss');
-
 const createThunkStore = applyMiddleware(thunk)(createStore);
 const store =  createThunkStore(reducers);
 
