@@ -12,6 +12,7 @@ export default class Video extends Component {
       autoPlay: true,
       height: this.props.height,
       key: this.props.src,
+      muted: true,
       onEnded: this.props.onEnded,
       onPlay: this.props.onPlay,
       width: this.props.width

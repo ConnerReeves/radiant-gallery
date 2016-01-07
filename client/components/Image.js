@@ -1,13 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-const imgStyles = {
-  left: '50%',
-  maxHeight: '100%',
-  maxWidth: '100%',
-  position: 'fixed',
-  top: '50%',
-  transform: 'translate(-50%, -50%)'
-};
+require('styles/image.scss');
 
 export default class Image extends Component {
   static propTypes = {
@@ -16,8 +9,8 @@ export default class Image extends Component {
 
   render() {
     const imgProps = {
-      src: this.props.src,
-      style: imgStyles
+      className: 'image',
+      src: this.props.src
     };
 
     return (
