@@ -1,8 +1,8 @@
-$white: #ecf0f1;
+@import 'colors';
 
 html, body {
   font-family: Roboto, sans-serif;
-  background-color: #111;
+  background-color: $black;
   color: $white;
   height: 100%;
   margin: 0;
