@@ -32,13 +32,14 @@ export class PlaybackControlsContainer extends Component {
 }
 
 export const mapStateToProps = (state) => {
-  const { currentAssetIndex, manifest, playbackStatus } = state;
+  const { currentAssetIndex, manifest, playbackStatus, showControls } = state;
   const currentAsset = manifest[currentAssetIndex];
 
   return {
     currentAssetPath: currentAsset && currentAsset.path,
     maxAssetIndex: manifest.length - 1,
-    playbackStatus
+    playbackStatus,
+    showControls
   };
 };
 

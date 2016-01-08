@@ -6,8 +6,7 @@ import {
   PREVIOUS_ASSET,
   SET_ASSET_INDEX,
   SET_FREQUENCY,
-  SET_VIEWPORT_SIZE,
-  START_SLIDESHOW
+  SET_VIEWPORT_SIZE
 } from 'constants/ActionTypes';
 
 export function setFrequency(frequency) {
@@ -28,10 +27,6 @@ export function setAssetIndex(index) {
 
 export function setViewportSize({ height, width }) {
   return { type: SET_VIEWPORT_SIZE, height, width };
-}
-
-export function startSlideshow() {
-  return { type: START_SLIDESHOW };
 }
 
 export function togglePlayback() {

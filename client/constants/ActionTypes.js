@@ -7,6 +7,10 @@ export const RIGHT_KEY_PRESSED = 'RIGHT_KEY_PRESSED';
 export const UNUSED_KEY_PRESSED = 'UNUSED_KEY_PRESSED';
 export const UP_KEY_PRESSED = 'UP_KEY_PRESSED';
 
+//Mouse Actions
+export const MOUSE_IDLE = 'MOUSE_IDLE';
+export const MOUSE_MOVED = 'MOUSE_MOVED';
+
 //Playback Actions
 export const NEXT_ASSET = 'NEXT_ASSET';
 export const PAUSE = 'PAUSE';
@@ -15,7 +19,6 @@ export const PREVIOUS_ASSET = 'PREVIOUS_ASSET';
 export const SET_ASSET_INDEX = 'SET_ASSET_INDEX';
 export const SET_FREQUENCY = 'SET_FREQUENCY';
 export const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
-export const START_SLIDESHOW = 'START_SLIDESHOW';
 
 //Fetch Actions
 export const FETCH_DIRECTORY_FAILED = 'FETCH_DIRECTORY_FAILED';

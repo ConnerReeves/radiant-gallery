@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import DirectoryNavigation from 'components/DirectoryNavigation';
-import { previousDirectory } from 'actions/KeypressActions';
 
 class DirectoryNavigationContainer extends Component {
   static propTypes = { currentPath: PropTypes.string };

@@ -4,10 +4,14 @@ import { connect } from 'react-redux';
 import App from 'components/App';
 import { fetchDirectory, fetchManifest } from 'actions/FetchActions';
 import { onKeyPress } from 'actions/KeypressActions';
+import { onMouseIdle, onMouseMove } from 'actions/MouseActions';
+
+let mouseIdleTimeout;
 
 export class AppContainer extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this._onKeyDown.bind(this));
+    document.addEventListener('mousemove', this._onMouseMove.bind(this));
     this.props.dispatch(fetchDirectory());
   }
 
@@ -25,6 +29,7 @@ export class AppContainer extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this._onKeyDown);
+    document.removeEventListener('mousemove', this._onMouseMove);
   }
 
   render() {
@@ -37,6 +42,14 @@ export class AppContainer extends Component {
 
   _onKeyDown({ keyCode }) {
     this.props.dispatch(onKeyPress(keyCode));
+  }
+
+  _onMouseMove() {
+    this.props.dispatch(onMouseMove());
+    clearTimeout(mouseIdleTimeout);
+    mouseIdleTimeout = setTimeout(() => {
+      this.props.dispatch(onMouseIdle());
+    }, 3000);
   }
 }
 

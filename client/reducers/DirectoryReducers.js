@@ -5,8 +5,7 @@ import {
   FETCH_DIRECTORY_SUCCEEDED,
   LEFT_KEY_PRESSED,
   RIGHT_KEY_PRESSED,
-  UP_KEY_PRESSED,
-  START_SLIDESHOW
+  UP_KEY_PRESSED
 } from 'constants/ActionTypes';
 
 const initialState = {
