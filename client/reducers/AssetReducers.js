@@ -1,4 +1,5 @@
 import {
+  ESC_KEY_PRESSED,
   FETCH_MANIFEST_SUCCEEDED,
   NEXT_ASSET,
   PREVIOUS_ASSET,
@@ -8,7 +9,10 @@ import {
 export function manifest(state = [], action) {
   switch (action.type) {
     case FETCH_MANIFEST_SUCCEEDED:
-      return action.payload.manifest;
+      return action.manifest;
+
+    case ESC_KEY_PRESSED:
+      return [];
   }
 
   return state;

@@ -25,7 +25,7 @@ app.get('/directory', (req, res) => {
 
 app.get('/manifest', (req, res) => {
   const path = req.query.path || mediaDir;
-  manifest.getManifest(path).then((manifest) => res.send(manifest));
+  manifest.getManifest(mediaDir, path).then((manifest) => res.send(manifest));
 });
 
 app.get('/', (req, res) => {

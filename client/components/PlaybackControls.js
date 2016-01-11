@@ -11,11 +11,9 @@ const leftStyles = { top: '10px', left: '10px', position: 'fixed', zIndex: 1 };
 const rightStyles = { top: '10px', right: '10px', position: 'fixed', zIndex: 1 };
 
 export default class PlaybackControls extends Component {
-  state = { focus: false, opacity: 0 };
+  state = { focus: false };
 
   componentDidMount() {
-    document.addEventListener('mousemove', this._onMouseMove.bind(this));
-
     const domNode = findDOMNode(this);
     domNode.addEventListener('mouseenter', () => { this.setState({ focus: true }); });
     domNode.addEventListener('mouseleave', () => { this.setState({ focus: false }); });
@@ -23,7 +21,7 @@ export default class PlaybackControls extends Component {
 
   render() {
     return (
-      <div style={{ opacity: this.state.opacity, ...containerStyles }}>
+      <div style={{ opacity: this.props.showControls || this.state.focus ? 1 : 0, ...containerStyles }}>
         { this._getPlaybackControls() }
         { this._getFrequencyControls() }
       </div>
@@ -63,16 +61,5 @@ export default class PlaybackControls extends Component {
     } else {
       return 'play';
     }
-  }
-
-  _onMouseMove() {
-    this.setState({ opacity: 1 }, () => {
-      clearTimeout(this.opacityTimeout);
-      this.opacityTimeout = setTimeout(() => {
-        if (!this.state.focus) {
-          this.setState({ opacity: 0 });
-        }
-      }, 3000);
-    });
   }
 }

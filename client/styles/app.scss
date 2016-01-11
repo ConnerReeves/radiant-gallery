@@ -1,0 +1,10 @@
+@import 'colors';
+
+html, body {
+  font-family: Roboto, sans-serif;
+  background-color: $dark-grey;
+  color: $white;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
