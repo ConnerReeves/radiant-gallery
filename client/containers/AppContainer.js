@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import App from 'components/App';
-import { fetchDirectory, fetchManifest } from 'actions/FetchActions';
+import { fetchManifest } from 'actions/FetchActions';
 import { onKeyPress } from 'actions/KeypressActions';
 import { onMouseIdle, onMouseMove } from 'actions/MouseActions';
 import { setViewportSize } from 'actions/ViewportActions';
@@ -14,19 +14,7 @@ export class AppContainer extends Component {
     document.addEventListener('keydown', this._onKeyDown.bind(this));
     document.addEventListener('mousemove', this._onMouseMove.bind(this));
     window.addEventListener('resize', this._onWindowResize.bind(this));
-    this.props.dispatch(fetchDirectory());
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (!this.props.directory.finalPath) {
-      if (this.props.directory.currentPath !== newProps.directory.currentPath) {
-        this.props.dispatch(fetchDirectory(newProps.directory.currentPath));
-      }
-
-      if (newProps.directory.finalPath) {
-        this.props.dispatch(fetchManifest(newProps.directory.finalPath));
-      }
-    }
+    this.props.dispatch(fetchManifest());
   }
 
   componentWillUnmount() {
@@ -36,10 +24,8 @@ export class AppContainer extends Component {
   }
 
   render() {
-    const props = { finalPathChosen: this.props.directory.finalPath };
-
     return (
-      <App { ...props } />
+      <App />
     );
   }
 
@@ -63,6 +49,5 @@ export class AppContainer extends Component {
   }
 }
 
-export const mapStateToProps = (state) => ({ directory: state.directory });
-
+export const mapStateToProps = (state) => ({});
 export default connect(mapStateToProps)(AppContainer);
