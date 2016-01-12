@@ -19,7 +19,7 @@ export class PlaybackControlsContainer extends Component {
   }
 
   _onBackButtonClick() {
-    this.props.dispatch(previousAsset(this.props.maxAssetIndex));
+    this.props.dispatch(previousAsset());
   }
 
   _onTogglePlaybackButtonClick() {
@@ -27,20 +27,13 @@ export class PlaybackControlsContainer extends Component {
   }
 
   _onForwardButtonClick() {
-    this.props.dispatch(nextAsset(this.props.maxAssetIndex));
+    this.props.dispatch(nextAsset());
   }
 }
 
-export const mapStateToProps = (state) => {
-  const { currentAssetIndex, manifest, playbackStatus, showControls } = state;
-  const currentAsset = manifest[currentAssetIndex];
-
-  return {
-    currentAssetPath: currentAsset && currentAsset.path,
-    maxAssetIndex: manifest.length - 1,
-    playbackStatus,
-    showControls
-  };
-};
+export const mapStateToProps = (state) => ({
+  playbackStatus: state.playbackStatus,
+  showControls: state.showControls
+});
 
 export default connect(mapStateToProps)(PlaybackControlsContainer);

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import AssetController from 'components/AssetController';
+import { getCurrentAsset } from 'reducers/AssetReducer';
 import { PLAYING } from 'constants/PlaybackStatuses';
-import { setAssetIndex } from 'actions/PlaybackActions';
+import { nextAsset } from 'actions/PlaybackActions';
 
 let playbackTimeout;
 
@@ -38,18 +39,14 @@ class AssetControllerContainer extends Component {
   }
 
   _changeAsset() {
-    const { currentAssetIndex, manifest } = this.props;
-    const newAssetIndex = currentAssetIndex >= manifest.length - 1 ? 0 : currentAssetIndex + 1;
-    this.props.dispatch(setAssetIndex(newAssetIndex));
+    this.props.dispatch(nextAsset());
   }
 }
 
-function mapStateToProps(state) {
-  const { currentAssetIndex, frequency, manifest, playbackStatus } = state;
-  const currentAsset = manifest[currentAssetIndex];
-  const maxAssetIndex = manifest && manifest.length - 1 || 0;
-
-  return { currentAsset, currentAssetIndex, frequency, manifest, maxAssetIndex, playbackStatus };
-}
+const mapStateToProps = (state) => ({
+  currentAsset: getCurrentAsset(state),
+  frequency: state.frequency,
+  playbackStatus: state.playbackStatus
+});
 
 export default connect(mapStateToProps)(AssetControllerContainer);

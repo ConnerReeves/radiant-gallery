@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import { currentAssetIndex, manifest } from './AssetReducers';
+import AssetReducer from 'AssetReducer';
 import { frequency, playbackStatus, showControls, viewportSize } from './PlaybackReducers';
 
 export default combineReducers({
-  currentAssetIndex,
+  AssetReducer,
   frequency,
-  manifest,
   playbackStatus,
   showControls,
   viewportSize

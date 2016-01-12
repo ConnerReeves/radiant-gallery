@@ -36,7 +36,6 @@ export function fetchManifest(path) {
           dispatch({ type: FETCH_MANIFEST_FAILED, payload });
         } else {
           dispatch({ type: FETCH_MANIFEST_SUCCEEDED, manifest: res.body });
-          dispatch({ type: SET_ASSET_INDEX, index: 0 });
         }
       });
   };

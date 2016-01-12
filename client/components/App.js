@@ -9,8 +9,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <PlaybackControlsContainer />
         <AssetControllerContainer />
+        <PlaybackControlsContainer />
       </div>
     );
   }

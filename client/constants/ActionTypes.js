@@ -16,7 +16,6 @@ export const NEXT_ASSET = 'NEXT_ASSET';
 export const PAUSE = 'PAUSE';
 export const PLAY = 'PLAY';
 export const PREVIOUS_ASSET = 'PREVIOUS_ASSET';
-export const SET_ASSET_INDEX = 'SET_ASSET_INDEX';
 export const SET_FREQUENCY = 'SET_FREQUENCY';
 export const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
 
