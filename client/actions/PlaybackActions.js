@@ -1,3 +1,4 @@
+import { getPlaybackStatus } from 'reducers/PlaybackReducer';
 import { PAUSED, PLAYING } from 'constants/PlaybackStatuses';
 import {
   NEXT_ASSET,
@@ -21,7 +22,8 @@ export function previousAsset() {
 
 export function togglePlayback() {
   return (dispatch, getState) => {
-    const { playbackStatus } = getState();
+    const state = getState();
+    const playbackStatus = getPlaybackStatus(state);
 
     switch (playbackStatus) {
       case PLAYING:

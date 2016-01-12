@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AssetControllerContainer from 'containers/AssetControllerContainer';
-import PlaybackControlsContainer from 'containers/PlaybackControlsContainer';
+import FadingControlsContainer from 'containers/FadingControlsContainer';
 
 require('styles/app.scss');
 
@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div>
         <AssetControllerContainer />
-        <PlaybackControlsContainer />
+        <FadingControlsContainer />
       </div>
     );
   }

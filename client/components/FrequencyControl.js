@@ -2,22 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import Icon from './Icon';
 
-const containerStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  opacity: 0.6
-};
-
-const selectStyles = {
-  background: '#FFF',
-  border: 'none',
-  borderRadius: '3px',
-  boxShadow: '0 0 10px 1px #000',
-  height: '20px',
-  marginLeft: '10px',
-  padding: '0 5px',
-  width: '90px'
-};
+require('styles/frequency-control.scss');
 
 export default class FrequencyControl extends Component {
   static propTypes = {
@@ -26,16 +11,10 @@ export default class FrequencyControl extends Component {
   };
 
   render() {
-    const selectProps = {
-      onChange: this.props.onChange,
-      style: selectStyles,
-      value: this.props.frequency
-    };
-
     return (
-      <div style={ containerStyles }>
+      <div className="frequency-control">
         <Icon name="clock-o" />
-        <select { ...selectProps }>
+        <select onChange={ this.props.onChange } value={ this.props.frequency }>
           <option value={ 5000 }>5 Seconds</option>
           <option value={ 10000 }>10 Seconds</option>
           <option value={ 30000 }>30 Seconds</option>

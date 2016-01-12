@@ -51,6 +51,6 @@ export const getCurrentAsset = createSelector(
     const currentAssetIndex = state.get('currentAssetIndex');
     const currentAsset = manifest.get(currentAssetIndex);
 
-    return currentAsset && currentAsset.toJS();
+    return currentAsset && currentAsset.toJS() || {};
   }
 );

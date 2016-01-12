@@ -6,38 +6,19 @@ import FrequencyControlContainer from 'containers/FrequencyControlContainer';
 import { PLAYING } from 'constants/PlaybackStatuses';
 import { isVideo } from 'utils/AppUtils';
 
-const containerStyles = { transition: 'opacity 0.5s ease-in-out' };
-const leftStyles = { top: '10px', left: '10px', position: 'fixed', zIndex: 1 };
-const rightStyles = { top: '10px', right: '10px', position: 'fixed', zIndex: 1 };
+require('styles/playback-controls.scss');
 
 export default class PlaybackControls extends Component {
-  state = { focus: false };
-
-  componentDidMount() {
-    const domNode = findDOMNode(this);
-    domNode.addEventListener('mouseenter', () => { this.setState({ focus: true }); });
-    domNode.addEventListener('mouseleave', () => { this.setState({ focus: false }); });
-  }
-
   render() {
-    return (
-      <div style={{ opacity: this.props.showControls || this.state.focus ? 1 : 0, ...containerStyles }}>
-        { this._getPlaybackControls() }
-        { this._getFrequencyControls() }
-      </div>
-    );
-  }
-
-  _getPlaybackControls() {
     const playbackToggleButtonProps = {
-      disabled: isVideo(this.props.currentAssetPath),
+      disabled: isVideo(this.props.currentAsset.path),
       name: this._getPlaybackToggleIcon(),
       onClick: this.props.onTogglePlaybackButtonClick,
       style: { width: '40px' }
     };
 
     return (
-      <div style={ leftStyles }>
+      <div className="playback-controls">
         <Icon name="backward" onClick={ this.props.onBackButtonClick } />
         <Icon { ...playbackToggleButtonProps } />
         <Icon name="forward" onClick={ this.props.onForwardButtonClick } />
@@ -45,16 +26,8 @@ export default class PlaybackControls extends Component {
     );
   }
 
-  _getFrequencyControls() {
-    return isVideo(this.props.currentAssetPath) ? null : (
-      <div style={ rightStyles }>
-        <FrequencyControlContainer />
-      </div>
-    );
-  }
-
   _getPlaybackToggleIcon() {
-    if (isVideo(this.props.currentAssetPath)) {
+    if (isVideo(this.props.currentAsset.path)) {
       return 'video-camera';
     } else if (this.props.playbackStatus === PLAYING) {
       return 'pause';

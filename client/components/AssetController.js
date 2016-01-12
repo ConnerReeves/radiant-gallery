@@ -13,8 +13,9 @@ export default class AssetController extends Component {
   };
 
   render() {
-    if (this.props.currentAsset) {
-      const assetPath = this.props.currentAsset.path;
+    const assetPath = this.props.currentAsset && this.props.currentAsset.path;
+
+    if (assetPath) {
       const props = { key: assetPath, src: assetPath };
 
       const assetComponent = {

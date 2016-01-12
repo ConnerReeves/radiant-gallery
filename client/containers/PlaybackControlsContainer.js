@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PlaybackControls from 'components/PlaybackControls';
-import { isMouseIdle } from 'reducers/MouseReducer';
 import { getPlaybackStatus } from 'reducers/PlaybackReducer';
+import { getCurrentAsset } from 'reducers/AssetReducer';
 import { nextAsset, togglePlayback, previousAsset } from 'actions/PlaybackActions';
 
 export class PlaybackControlsContainer extends Component {
   render() {
     const props = {
+      currentAsset: this.props.currentAsset,
       onBackButtonClick: this._onBackButtonClick.bind(this),
       onForwardButtonClick: this._onForwardButtonClick.bind(this),
       onTogglePlaybackButtonClick: this._onTogglePlaybackButtonClick.bind(this),
-      ...this.props
+      playbackStatus: this.props.playbackStatus
     };
 
     return (
@@ -34,8 +35,8 @@ export class PlaybackControlsContainer extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-  playbackStatus: getPlaybackStatus(state),
-  showControls: !isMouseIdle(state)
+  currentAsset: getCurrentAsset(state),
+  playbackStatus: getPlaybackStatus(state)
 });
 
 export default connect(mapStateToProps)(PlaybackControlsContainer);

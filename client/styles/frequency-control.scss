@@ -1,0 +1,21 @@
+@import 'colors';
+
+.frequency-control {
+  align-items: center;
+  display: flex;
+  opacity: 0.6;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  select {
+    background: #FFF;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 10px 1px $black;
+    height: 20px;
+    margin-left: 10px;
+    padding: 0 5px;
+    width: 90px;
+  }
+}

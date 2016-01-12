@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AssetController from 'components/AssetController';
 import { getCurrentAsset } from 'reducers/AssetReducer';
+import { getFrequency, getPlaybackStatus } from 'reducers/PlaybackReducer';
 import { PLAYING } from 'constants/PlaybackStatuses';
 import { nextAsset } from 'actions/PlaybackActions';
 
@@ -45,8 +46,8 @@ class AssetControllerContainer extends Component {
 
 const mapStateToProps = (state) => ({
   currentAsset: getCurrentAsset(state),
-  frequency: state.frequency,
-  playbackStatus: state.playbackStatus
+  frequency: getFrequency(state),
+  playbackStatus: getPlaybackStatus(state)
 });
 
 export default connect(mapStateToProps)(AssetControllerContainer);
