@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import FrequencyControl from 'components/FrequencyControl';
+import { getFrequency } from 'reducers/PlaybackReducer';
 import { setFrequency } from 'actions/PlaybackActions';
 
 class FrequencyControlContainer extends Component {
@@ -26,5 +27,8 @@ class FrequencyControlContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ frequency: state.frequency });
+const mapStateToProps = (state) => ({
+  frequency: getFrequency(state)
+});
+
 export default connect(mapStateToProps)(FrequencyControlContainer);

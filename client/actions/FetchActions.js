@@ -7,8 +7,7 @@ import {
   FETCH_DIRECTORY_REQUESTED,
   FETCH_MANIFEST_SUCCEEDED,
   FETCH_MANIFEST_FAILED,
-  FETCH_MANIFEST_REQUESTED,
-  SET_ASSET_INDEX
+  FETCH_MANIFEST_REQUESTED
 } from 'constants/ActionTypes';
 
 export function fetchDirectory(path) {

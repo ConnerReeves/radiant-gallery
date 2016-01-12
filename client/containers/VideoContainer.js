@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Video from 'components/Video';
+import { getViewportHeight, getViewportWidth } from 'reducers/ViewportReducer';
+import { getPlaybackStatus } from 'reducers/PlaybackReducer';
 import { nextAsset, togglePlayback } from 'actions/PlaybackActions';
 import { PLAYING } from 'constants/PlaybackStatuses';
 
@@ -18,11 +20,11 @@ export class VideoContainer extends Component {
 
   render() {
     const props = {
-      height: this.props.viewportSize.height,
+      height: this.props.viewportHeight,
       src: this.props.src,
       onEnded: this._resumePlayback.bind(this),
       onPlay: this._onVideoStart.bind(this),
-      width: this.props.viewportSize.width
+      width: this.props.viewportWidth
     };
 
     return (
@@ -52,8 +54,9 @@ export class VideoContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  playbackStatus: state.playbackStatus,
-  viewportSize: state.viewportSize
+  playbackStatus: getPlaybackStatus(state),
+  viewportHeight: getViewportHeight(state),
+  viewportWidth: getViewportWidth(state)
 });
 
 export default connect(mapStateToProps)(VideoContainer);

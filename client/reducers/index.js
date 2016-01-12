@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import AssetReducer from 'AssetReducer';
-import { frequency, playbackStatus, showControls, viewportSize } from './PlaybackReducers';
+import MouseReducer from 'MouseReducer';
+import PlaybackReducer from 'PlaybackReducer';
+import ViewportReducer from 'ViewportReducer';
 
 export default combineReducers({
   AssetReducer,
-  frequency,
-  playbackStatus,
-  showControls,
-  viewportSize
+  MouseReducer,
+  PlaybackReducer,
+  ViewportReducer
 });

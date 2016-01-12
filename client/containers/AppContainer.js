@@ -49,5 +49,4 @@ export class AppContainer extends Component {
   }
 }
 
-export const mapStateToProps = (state) => ({});
-export default connect(mapStateToProps)(AppContainer);
+export default connect()(AppContainer);
