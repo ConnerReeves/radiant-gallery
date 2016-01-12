@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 
 import Icon from './Icon';
-import FrequencyControlContainer from 'containers/FrequencyControlContainer';
 import { PLAYING } from 'constants/PlaybackStatuses';
 import { isVideo } from 'utils/AppUtils';
 

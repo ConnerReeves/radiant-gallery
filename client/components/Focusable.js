@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import PlaybackControlsContainer from 'containers/PlaybackControlsContainer';
-import FrequencyControlContainer from 'containers/FrequencyControlContainer';
-
 require('styles/fading-controls.scss');
 
 export default class Fucusable extends Component {
