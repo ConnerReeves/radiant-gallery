@@ -14,4 +14,4 @@ export default (ComposedComponent) => class extends Component {
       <ComposedComponent { ...this.props } />
     );
   }
-}
+};

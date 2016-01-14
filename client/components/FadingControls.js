@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Focusable from 'Focusable';
 import PlaybackControlsContainer from 'containers/PlaybackControlsContainer';
 import FrequencyControlContainer from 'containers/FrequencyControlContainer';
 
