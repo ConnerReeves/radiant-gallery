@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import AssetController from 'components/AssetController';
+import { togglePlayback } from 'actions/PlaybackActions';
 import { getCurrentAsset } from 'reducers/AssetReducer';
 import { getFrequency, getPlaybackStatus } from 'reducers/PlaybackReducer';
 import { PLAYING } from 'constants/PlaybackStatuses';
@@ -10,6 +11,10 @@ import { nextAsset } from 'actions/PlaybackActions';
 let playbackTimeout;
 
 class AssetControllerContainer extends Component {
+  componentDidMount() {
+    this.props.dispatch(togglePlayback());
+  }
+
   componentWillReceiveProps(nextProps) {
     const playbackStatusChanged = this.props.playbackStatus !== nextProps.playbackStatus;
     const frequencyChanged = this.props.frequency !== nextProps.frequency;
