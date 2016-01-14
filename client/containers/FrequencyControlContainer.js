@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import FrequencyControl from 'components/FrequencyControl';
+import Focusable from 'components/Focusable';
 import { getFrequency } from 'reducers/PlaybackReducer';
 import { setFrequency } from 'actions/PlaybackActions';
 
@@ -31,4 +32,5 @@ const mapStateToProps = (state) => ({
   frequency: getFrequency(state)
 });
 
-export default connect(mapStateToProps)(FrequencyControlContainer);
+const FocusableFrequencyControlContainer = Focusable(FrequencyControlContainer);
+export default connect(mapStateToProps)(FocusableFrequencyControlContainer);

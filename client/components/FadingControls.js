@@ -10,27 +10,24 @@ export default class FadingControls extends Component {
   state = { focus: false };
 
   render() {
+    const focusProps = {
+      onBlur: this._onControlBlur.bind(this),
+      onFocus: this._onControlFocus.bind(this)
+    };
+
     return (
       <div className="fading-controls" style={{ opacity: this.props.show || this.state.focus ? 1 : 0 }}>
-        { this._getFocusable(<PlaybackControlsContainer />) }
-        { this._getFocusable(<FrequencyControlContainer />) }
+        <PlaybackControlsContainer { ...focusProps } />
+        <FrequencyControlContainer { ...focusProps } />
       </div>
     );
   }
 
-  _getFocusable(element) {
-    return (
-      <Focusable onBlur={ this._onBlur.bind(this) } onFocus={ this._onFocus.bind(this) }>
-        { element }
-      </Focusable>
-    );
-  }
-
-  _onFocus() {
+  _onControlFocus() {
     this.setState({ focus: true });
   }
 
-  _onBlur() {
+  _onControlBlur() {
     this.setState({ focus: false });
   }
 }

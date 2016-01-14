@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PlaybackControls from 'components/PlaybackControls';
+import Focusable from 'components/Focusable';
 import { getPlaybackStatus } from 'reducers/PlaybackReducer';
 import { getCurrentAsset } from 'reducers/AssetReducer';
 import { nextAsset, togglePlayback, previousAsset } from 'actions/PlaybackActions';
@@ -39,4 +40,5 @@ export const mapStateToProps = (state) => ({
   playbackStatus: getPlaybackStatus(state)
 });
 
-export default connect(mapStateToProps)(PlaybackControlsContainer);
+const FocusablePlaybackControlsContainer = Focusable(PlaybackControlsContainer);
+export default connect(mapStateToProps)(FocusablePlaybackControlsContainer);
