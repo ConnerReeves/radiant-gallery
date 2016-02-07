@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Video from 'components/Video';
 import { getViewportHeight, getViewportWidth } from 'reducers/ViewportReducer';
@@ -40,15 +41,15 @@ export class VideoContainer extends Component {
   _onVideoStart() {
     if (this.props.playbackStatus === PLAYING) {
       this.setState({ shouldResumePlayback: true });
-      this.props.dispatch(togglePlayback());
+      this.props.togglePlayback();
     }
   }
 
   _resumePlayback() {
     if (this.state.shouldResumePlayback) {
       this.setState({ shouldResumePlayback: false });
-      this.props.dispatch(nextAsset());
-      this.props.dispatch(togglePlayback());
+      this.props.nextAsset();
+      this.props.togglePlayback();
     }
   }
 }
@@ -59,4 +60,12 @@ const mapStateToProps = (state) => ({
   viewportWidth: getViewportWidth(state)
 });
 
-export default connect(mapStateToProps)(VideoContainer);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    nextAsset,
+    togglePlayback,
+    togglePlayback
+  }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoContainer);

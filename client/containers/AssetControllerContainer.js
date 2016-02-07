@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import AssetController from 'components/AssetController';
 import { togglePlayback } from 'actions/PlaybackActions';
@@ -12,7 +13,7 @@ let playbackTimeout;
 
 class AssetControllerContainer extends Component {
   componentDidMount() {
-    this.props.dispatch(togglePlayback());
+    this.props.togglePlayback();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,7 +46,7 @@ class AssetControllerContainer extends Component {
   }
 
   _changeAsset() {
-    this.props.dispatch(nextAsset());
+    this.props.nextAsset();
   }
 }
 
@@ -55,4 +56,11 @@ const mapStateToProps = (state) => ({
   playbackStatus: getPlaybackStatus(state)
 });
 
-export default connect(mapStateToProps)(AssetControllerContainer);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    nextAsset,
+    togglePlayback
+  }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AssetControllerContainer);

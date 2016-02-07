@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import PlaybackControls from 'components/PlaybackControls';
 import Focusable from 'components/Focusable';
@@ -11,27 +12,15 @@ export class PlaybackControlsContainer extends Component {
   render() {
     const props = {
       currentAsset: this.props.currentAsset,
-      onBackButtonClick: this._onBackButtonClick.bind(this),
-      onForwardButtonClick: this._onForwardButtonClick.bind(this),
-      onTogglePlaybackButtonClick: this._onTogglePlaybackButtonClick.bind(this),
+      onBackButtonClick: this.props.previousAsset,
+      onForwardButtonClick: this.props.nextAsset,
+      onTogglePlaybackButtonClick: this.props.togglePlayback,
       playbackStatus: this.props.playbackStatus
     };
 
     return (
       <PlaybackControls { ...props } />
     );
-  }
-
-  _onBackButtonClick() {
-    this.props.dispatch(previousAsset());
-  }
-
-  _onTogglePlaybackButtonClick() {
-    this.props.dispatch(togglePlayback());
-  }
-
-  _onForwardButtonClick() {
-    this.props.dispatch(nextAsset());
   }
 }
 
@@ -40,5 +29,13 @@ export const mapStateToProps = (state) => ({
   playbackStatus: getPlaybackStatus(state)
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    nextAsset,
+    previousAsset,
+    togglePlayback
+  }, dispatch)
+});
+
 const FocusablePlaybackControlsContainer = Focusable(PlaybackControlsContainer);
-export default connect(mapStateToProps)(FocusablePlaybackControlsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FocusablePlaybackControlsContainer);

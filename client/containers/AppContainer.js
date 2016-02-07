@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import App from 'components/App';
 import { fetchManifest } from 'actions/FetchActions';
@@ -14,7 +15,7 @@ export class AppContainer extends Component {
     document.addEventListener('keydown', this._onKeyDown.bind(this));
     document.addEventListener('mousemove', this._onMouseMove.bind(this));
     window.addEventListener('resize', this._onWindowResize.bind(this));
-    this.props.dispatch(fetchManifest());
+    this.props.fetchManifest();
   }
 
   componentWillUnmount() {
@@ -30,23 +31,33 @@ export class AppContainer extends Component {
   }
 
   _onKeyDown({ keyCode }) {
-    this.props.dispatch(onKeyPress(keyCode));
+    this.props.onKeyPress(keyCode);
   }
 
   _onMouseMove() {
-    this.props.dispatch(onMouseMove());
+    this.props.onMouseMove();
     clearTimeout(mouseIdleTimeout);
     mouseIdleTimeout = setTimeout(() => {
-      this.props.dispatch(onMouseIdle());
+      this.props.onMouseIdle();
     }, 3000);
   }
 
   _onWindowResize() {
-    this.props.dispatch(setViewportSize({
+    this.props.setViewportSize({
       height: window.innerHeight,
       width: window.innerWidth
-    }));
+    });
   }
 }
 
-export default connect()(AppContainer);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    fetchManifest,
+    onKeyPress,
+    onMouseIdle,
+    onMouseMove,
+    setViewportSize
+  }, dispatch)
+});
+
+export default connect(() => ({}), mapDispatchToProps)(AppContainer);
