@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import AssetController from 'components/AssetController';
 import { togglePlayback } from 'actions/PlaybackActions';
@@ -56,11 +55,9 @@ const mapStateToProps = (state) => ({
   playbackStatus: getPlaybackStatus(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    nextAsset,
-    togglePlayback
-  }, dispatch)
-});
+const mapDispatchToProps = {
+  nextAsset,
+  togglePlayback
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetControllerContainer);

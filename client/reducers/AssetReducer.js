@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { getNewIndex } from 'utils/AppUtils';
 import { createReducer } from 'utils/ReducerUtils';
 import {
-  FETCH_MANIFEST_SUCCEEDED,
+  RECEIVE_MANIFEST,
   LEFT_KEY_PRESSED,
   NEXT_ASSET,
   PREVIOUS_ASSET,
@@ -31,7 +31,7 @@ const previousAsset = (state) => {
 };
 
 export default createReducer(initialState, {
-  [ FETCH_MANIFEST_SUCCEEDED ]: (state, { manifest }) => {
+  [ RECEIVE_MANIFEST ]: (state, { manifest }) => {
     return state
       .set('currentAssetIndex', 0)
       .set('manifest', fromJS(manifest));

@@ -10,7 +10,7 @@ export default class Icon extends Component {
 
   render() {
     const iconProps = {
-      className: `fa fa-${this.props.name}`,
+      className: `icon fa fa-${this.props.name}`,
       onClick: () => !this.props.disabled && this.props.onClick()
     };
 
@@ -18,7 +18,7 @@ export default class Icon extends Component {
       color: 'white',
       cursor: !this.props.disabled && this.props.onClick ? 'pointer' : 'default',
       fontSize: '18px',
-      opacity: this.props.disabled ? 0.1 : 0.6,
+      opacity: this.props.disabled ? 0.5 : 1,
       textAlign: 'center',
       textShadow: '3px 0 5px #000',
       WebkitUserSelect: 'none',

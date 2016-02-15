@@ -1,0 +1,65 @@
+@import 'colors';
+
+$panel-width: 300px;
+$border-width: 1px;
+$total-width: $panel-width + $border-width;
+
+.directory-navigation {
+  background-color: $black;
+  border-right: $border-width solid $light-grey;
+  color: $light-grey;
+  height: 100%;
+  margin-left: -$total-width;
+  overflow-y: auto;
+  width: $panel-width;
+  z-index: 1;
+  transition: margin-left 250ms ease-in-out;
+
+  .icon {
+    &.fa-bars {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+  }
+
+  &.visible {
+    margin-left: 0;
+
+    .icon.fa-bars {
+      left: $total-width + 10px;
+    }
+  }
+
+  .header {
+    position: fixed;
+    background-color: $black;
+    width: $panel-width - 20px;
+    border-bottom: 1px solid $light-grey;
+    padding: 5px 10px;
+
+    .icon {
+      float: right;
+    }
+  }
+
+  .directory {
+    margin-top: 35px;
+  }
+
+  .directory-item {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    height: 20px;
+    font-size: 12px;
+
+    i {
+      width: 20px;
+    }
+
+    input {
+      margin-right: 8px;
+    }
+  }
+}

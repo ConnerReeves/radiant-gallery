@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import FrequencyControl from 'components/FrequencyControl';
 import Focusable from 'components/Focusable';
@@ -33,11 +32,9 @@ const mapStateToProps = (state) => ({
   frequency: getFrequency(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    setFrequency
-  }, dispatch)
-});
+const mapDispatchToProps = {
+  setFrequency
+};
 
 const FocusableFrequencyControlContainer = Focusable(FrequencyControlContainer);
 export default connect(mapStateToProps, mapDispatchToProps)(FocusableFrequencyControlContainer);

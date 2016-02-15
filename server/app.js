@@ -17,10 +17,7 @@ app.use(express.static('dist'));
 app.use(express.static(mediaDir));
 
 app.get('/directory', (req, res) => {
-  const path = req.query.path || mediaDir;
-  directory.getSubDirs(path).then((children) => {
-    res.send({ path, children });
-  });
+  directory.getDirectory(mediaDir).then((directory) => res.send(directory));
 });
 
 app.get('/manifest', (req, res) => {

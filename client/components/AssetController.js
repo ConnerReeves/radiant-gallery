@@ -25,6 +25,7 @@ export default class AssetController extends Component {
 
       const transitionGroupProps = {
         children: assetComponent,
+        className: 'asset',
         component: 'div',
         transitionAppear: true,
         transitionAppearTimeout: 2000,

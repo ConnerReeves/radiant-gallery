@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Video from 'components/Video';
 import { getViewportHeight, getViewportWidth } from 'reducers/ViewportReducer';
@@ -60,12 +59,10 @@ const mapStateToProps = (state) => ({
   viewportWidth: getViewportWidth(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    nextAsset,
-    togglePlayback,
-    togglePlayback
-  }, dispatch)
-});
+const mapDispatchToProps = {
+  nextAsset,
+  togglePlayback,
+  togglePlayback
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoContainer);

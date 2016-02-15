@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import PlaybackControls from 'components/PlaybackControls';
 import Focusable from 'components/Focusable';
@@ -29,13 +28,11 @@ export const mapStateToProps = (state) => ({
   playbackStatus: getPlaybackStatus(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    nextAsset,
-    previousAsset,
-    togglePlayback
-  }, dispatch)
-});
+const mapDispatchToProps = {
+  nextAsset,
+  previousAsset,
+  togglePlayback
+};
 
 const FocusablePlaybackControlsContainer = Focusable(PlaybackControlsContainer);
 export default connect(mapStateToProps, mapDispatchToProps)(FocusablePlaybackControlsContainer);
